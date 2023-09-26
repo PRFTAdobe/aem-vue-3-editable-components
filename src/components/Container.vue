@@ -1,0 +1,149 @@
+<script lang="ts" setup>
+  import { computed, h, inject, PropType, VNode } from 'vue';
+  import { AuthoringUtils, Model } from '@adobe/aem-spa-page-model-manager';
+  import { ComponentMapping } from '@adobe/aem-spa-component-mapping';
+  import Utils from '@/utils/Utils';
+  import ContainerPlaceholder from '@/components/ContainerPlaceholder.vue';
+
+  interface ChildProperties {
+    cqType?: string;
+  }
+
+  const props = defineProps({
+    aemNoDecoration: {
+      type: Boolean,
+      default: false,
+    },
+    // eslint-disable-next-line vue/require-default-prop
+    appliedCssClassNames: {
+      type: String,
+    },
+    cqItems: {
+      type: Object as PropType<{
+        [key: string]: Model;
+      }>,
+      default: () => ({}),
+    },
+    cqItemsOrder: {
+      type: Array as PropType<Array<string>>,
+      default: () => [],
+    },
+    cqPath: {
+      type: String,
+      default: '',
+    },
+    // eslint-disable-next-line vue/require-default-prop
+    getContainerProps: {
+      type: Function,
+    },
+    // eslint-disable-next-line vue/require-default-prop
+    getItemComponentProps: {
+      type: Function,
+    },
+    // eslint-disable-next-line vue/require-default-prop
+    getPlaceholderProps: {
+      type: Function,
+    },
+  });
+
+  const isInEditor = inject('isInEditor', AuthoringUtils.isInEditor());
+  const componentMapping = inject('componentMapping', new ComponentMapping());
+
+  const getItemPath = (itemKey: string) =>
+    props.cqPath?.length > 0 ? `${props.cqPath}/${itemKey}` : itemKey;
+
+  const connectComponentWithItem = (
+    itemComponent: VNode,
+    itemProps: ChildProperties,
+    itemKey: string,
+  ) => {
+    const itemPath = getItemPath(itemKey);
+
+    return h(itemComponent, {
+      ...itemProps,
+      cqPath: itemPath,
+      containerProps:
+        typeof props.getItemComponentProps === 'function'
+          ? props.getItemComponentProps(itemKey)
+          : {},
+    });
+  };
+
+  const containerProps = computed(() => {
+    let containerProperties: { [key: string]: string } = {};
+    if (typeof props.getContainerProps === 'function') {
+      containerProperties = props.getContainerProps();
+    } else {
+      containerProperties = {
+        class: 'aem-container',
+      };
+
+      if (isInEditor) {
+        containerProperties['data-cq-data-path'] = props.cqPath;
+      }
+    }
+
+    return containerProperties;
+  });
+
+  const childComponents = computed((): VNode[] => {
+    const childComponentNodes: VNode[] = [];
+
+    if (
+      Object.keys(props.cqItems).length > 0 &&
+      props.cqItemsOrder.length > 0
+    ) {
+      props.cqItemsOrder.forEach((itemKey) => {
+        const itemProps = Utils.modelToProps(
+          props.cqItems[itemKey],
+        ) as ChildProperties;
+
+        if (itemProps && typeof itemProps.cqType !== 'undefined') {
+          const itemComponent = componentMapping.get(itemProps.cqType) as VNode;
+
+          if (itemComponent) {
+            childComponentNodes.push(
+              connectComponentWithItem(itemComponent, itemProps, itemKey),
+            );
+          }
+        }
+      });
+    }
+
+    return childComponentNodes;
+  });
+
+  const placeholderProps = computed(() => {
+    if (typeof props.getPlaceholderProps === 'function') {
+      return props.getPlaceholderProps();
+    }
+    return {
+      cqPath: props.cqPath,
+      placeholderClassNames: 'new section',
+    };
+  });
+
+  defineOptions({
+    // eslint-disable-next-line vue/multi-word-component-names
+    name: 'Container',
+    inheritAttrs: false,
+  });
+</script>
+
+<template>
+  <template v-if="!isInEditor && props.aemNoDecoration">
+    <component
+      :is="childComponent"
+      v-for="childComponent of childComponents"
+      :key="childComponent.toString()"
+    />
+  </template>
+  <div v-else v-bind="{ ...containerProps }">
+    <component
+      :is="childComponent"
+      v-for="childComponent of childComponents"
+      :key="childComponent.toString()"
+    />
+    <ContainerPlaceholder v-if="isInEditor" v-bind="placeholderProps" />
+  </div>
+</template>
