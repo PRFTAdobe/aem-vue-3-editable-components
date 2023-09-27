@@ -1,7 +1,11 @@
 import { mount } from '@vue/test-utils';
-import { defineComponent, h, PropType } from 'vue';
-import { ComponentMapping } from '@/ComponentMapping';
+import { defineComponent, h, inject } from 'vue';
+import { ComponentMapping, withEditable } from '@/ComponentMapping';
 import ResponsiveGrid from '@/components/ResponsiveGrid.vue';
+import {
+  componentClassNames,
+  componentProperties,
+} from '@/ComponentProperties';
 
 describe('ResponsiveGrid ->', () => {
   const STANDARD_GRID_PROPS = {
@@ -54,39 +58,27 @@ describe('ResponsiveGrid ->', () => {
     name: 'ChildComponent',
     inheritAttrs: false,
     props: {
-      className: {
-        type: String,
-        required: true,
-      },
-      id: {
-        type: String,
-        default: null,
-      },
-      // eslint-disable-next-line vue/require-default-prop
-      containerProps: {
-        type: Object as PropType<{ class?: string }>,
-      },
+      ...componentProperties(ITEM_CLASS_NAME),
+    },
+    setup() {
+      const isInEditor = inject('isInEditor', false);
+      return { isInEditor };
     },
     computed: {
       componentClass() {
-        const className = [];
-        if (this.className) {
-          className.push(this.className);
-        }
-        if (this.containerProps && this.containerProps.class) {
-          className.push(this.containerProps.class);
-        }
-        return className.join(' ');
+        return componentClassNames(
+          this.baseCssClass,
+          this.appliedCssClassNames,
+          this.containerProps,
+          this.isInEditor,
+        );
       },
     },
     template: `
       <div :id='id' :class='componentClass' />`,
   });
 
-  const getChildComponent = () =>
-    h(ChildComponent, {
-      className: ITEM_CLASS_NAME,
-    });
+  const getChildComponent = () => h(ChildComponent);
 
   let ComponentMappingSpy: jest.SpyInstance;
 
@@ -153,7 +145,7 @@ describe('ResponsiveGrid ->', () => {
 
   describe('Column class names ->', () => {
     it('should add the expected column class names', () => {
-      ComponentMappingSpy.mockReturnValue(getChildComponent());
+      ComponentMappingSpy.mockReturnValue(withEditable(getChildComponent()));
       mount(ResponsiveGrid, {
         propsData: {
           ...STANDARD_GRID_PROPS,
@@ -170,6 +162,8 @@ describe('ResponsiveGrid ->', () => {
         },
         attachTo: rootNode,
       });
+
+      console.log(rootNode!.innerHTML);
 
       const childItem1 = rootNode!.querySelector(
         `.${COLUMN_1_CLASS_NAMES}${ITEM1_DATA_ATTRIBUTE_SELECTOR}`,
