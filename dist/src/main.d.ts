@@ -1,5 +1,6 @@
 export { default as Utils } from './utils/Utils';
 export * from './ComponentMapping';
+export * from './ComponentProperties';
 export { default as AllowedComponentPlaceholder } from './components/AllowedComponentPlaceholder.vue';
 export { default as AllowedComponentPlaceholderList } from './components/AllowedComponentPlaceholderList.vue';
 export { default as AllowedComponentsContainer } from './components/AllowedComponentsContainer.vue';
