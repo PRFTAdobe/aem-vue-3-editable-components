@@ -44,9 +44,16 @@
     getPlaceholderProps: {
       type: Function,
     },
+    isInEditor: {
+      type: Boolean,
+      default: undefined,
+    },
   });
 
-  const isInEditor = inject('isInEditor', AuthoringUtils.isInEditor());
+  const computedIsInEditor =
+    typeof props.isInEditor !== 'undefined'
+      ? props.isInEditor
+      : inject('isInEditor', AuthoringUtils.isInEditor());
   const componentMapping = inject('componentMapping', new ComponentMapping());
 
   const getItemPath = (itemKey: string) =>
@@ -78,7 +85,7 @@
         class: 'aem-container',
       };
 
-      if (isInEditor) {
+      if (computedIsInEditor) {
         containerProperties['data-cq-data-path'] = props.cqPath;
       }
     }
@@ -131,7 +138,7 @@
 </script>
 
 <template>
-  <template v-if="!isInEditor && props.aemNoDecoration">
+  <template v-if="!computedIsInEditor && props.aemNoDecoration">
     <component
       :is="childComponent"
       v-for="childComponent of childComponents"
@@ -144,6 +151,6 @@
       v-for="childComponent of childComponents"
       :key="childComponent.toString()"
     />
-    <ContainerPlaceholder v-if="isInEditor" v-bind="placeholderProps" />
+    <ContainerPlaceholder v-if="computedIsInEditor" v-bind="placeholderProps" />
   </div>
 </template>

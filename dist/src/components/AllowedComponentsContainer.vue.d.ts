@@ -42,6 +42,10 @@ declare const _default: import("vue").DefineComponent<{
     getPlaceholderProps: {
         type: FunctionConstructor;
     };
+    isInEditor: {
+        type: BooleanConstructor;
+        default: undefined;
+    };
     title: {
         type: StringConstructor;
     };
@@ -76,6 +80,10 @@ declare const _default: import("vue").DefineComponent<{
     getPlaceholderProps: {
         type: FunctionConstructor;
     };
+    isInEditor: {
+        type: BooleanConstructor;
+        default: undefined;
+    };
     title: {
         type: StringConstructor;
     };
@@ -85,6 +93,7 @@ declare const _default: import("vue").DefineComponent<{
         [key: string]: Model;
     };
     cqItemsOrder: string[];
+    isInEditor: boolean;
     _allowedComponentPlaceholderListEmptyLabel: string;
 }, {}>;
 export default _default;

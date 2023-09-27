@@ -53,13 +53,20 @@
     getPlaceholderProps: {
       type: Function,
     },
+    isInEditor: {
+      type: Boolean,
+      default: undefined,
+    },
     // eslint-disable-next-line vue/require-default-prop
     title: {
       type: String,
     },
   });
 
-  const isInEditor = inject('isInEditor', AuthoringUtils.isInEditor());
+  const computedIsInEditor =
+    typeof props.isInEditor !== 'undefined'
+      ? props.isInEditor
+      : inject('isInEditor', AuthoringUtils.isInEditor());
 
   const placeholderProps = computed(() => {
     if (typeof props.getPlaceholderProps === 'function') {
@@ -80,7 +87,7 @@
 <template>
   <AllowedComponentPlaceholderList
     v-if="
-      isInEditor &&
+      computedIsInEditor &&
       props.allowedComponents &&
       props.allowedComponents?.applicable
     "

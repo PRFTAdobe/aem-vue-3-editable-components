@@ -163,8 +163,6 @@ describe('ResponsiveGrid ->', () => {
         attachTo: rootNode,
       });
 
-      console.log(rootNode!.innerHTML);
-
       const childItem1 = rootNode!.querySelector(
         `.${COLUMN_1_CLASS_NAMES}${ITEM1_DATA_ATTRIBUTE_SELECTOR}`,
       );

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
   import { inject, PropType, useAttrs } from 'vue';
-  import { AuthoringUtils } from '@adobe/aem-spa-page-model-manager';
   import AllowedComponentsContainer from '@/components/AllowedComponentsContainer.vue';
+  import { AuthoringUtils } from '@adobe/aem-spa-page-model-manager';
 
   const props = defineProps({
     cqPath: {
@@ -16,10 +16,17 @@
     columnClassNames: {
       type: Object as PropType<{ [key: string]: string }>,
     },
+    isInEditor: {
+      type: Boolean,
+      default: undefined,
+    },
   });
 
   const attrs = useAttrs();
-  const isInEditor = inject('isInEditor', AuthoringUtils.isInEditor());
+  const computedIsInEditor =
+    typeof props.isInEditor !== 'undefined'
+      ? props.isInEditor
+      : inject('isInEditor', AuthoringUtils.isInEditor());
 
   const getContainerProps = () => {
     const containerProperties: { [key: string]: string } = {};
@@ -32,7 +39,7 @@
 
     containerProperties.class = containerPropertiesClass.join(' ');
 
-    if (isInEditor) {
+    if (computedIsInEditor) {
       containerProperties['data-cq-data-path'] = props.cqPath;
     }
 
@@ -82,6 +89,7 @@
     :get-container-props="getContainerProps"
     :get-item-component-props="getItemComponentProps"
     :get-placeholder-props="getPlaceholderProps"
+    :is-in-editor="computedIsInEditor"
     v-bind="{ ...attrs }"
   />
 </template>
