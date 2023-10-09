@@ -91,7 +91,7 @@
 
   onMounted(() => {
     const cqPath = updatedCqPath();
-    propsAsRefs.cqPath = cqPath;
+    propsAsRefs = { ...propsAsRefs, cqPath };
 
     if (props.injectPropsOnInit) {
       updateData(cqPath);
@@ -109,5 +109,8 @@
 </script>
 
 <template>
-  <component :is="slots.default?.()[0] as Component" v-bind="propsAsRefs" />
+  <component
+    :is="slots.default?.()[0] as Component"
+    v-bind="{ ...propsAsRefs }"
+  />
 </template>
