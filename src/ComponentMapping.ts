@@ -38,23 +38,23 @@ export interface ReloadableModelProperties {
 }
 
 const withContext = <P extends MappedComponentProperties>(
-  wrappedComponent: Component<P>
+  wrappedComponent: Component<P>,
 ) => h(ContextProvider, {}, () => [h(wrappedComponent)]);
 
 const withModel = <P extends MappedComponentProperties>(
   wrappedComponent: Component<P>,
-  modelConfig?: ReloadableModelProperties
+  modelConfig?: ReloadableModelProperties,
 ) => h(CompositeModelProvider, { modelConfig }, () => [h(wrappedComponent)]);
 
 const withEditable = <P extends MappedComponentProperties>(
   wrappedComponent: Component<P>,
-  editConfig?: EditConfig<P>
+  editConfig?: EditConfig<P>,
 ) => h(CompositeEditableProvider, { editConfig }, () => [h(wrappedComponent)]);
 
 const withMappable = <P extends MappedComponentProperties>(
   component: Component<P>,
   editConfig?: EditConfig<P>,
-  config?: ReloadableModelProperties
+  config?: ReloadableModelProperties,
 ): Component<P> => {
   const {
     injectPropsOnInit = true,
@@ -69,7 +69,7 @@ const withMappable = <P extends MappedComponentProperties>(
   let mappedComponent: Component<P> = component;
 
   mappedComponent = withContext(
-    withModel(withEditable(mappedComponent, editConfig), modelConfig)
+    withModel(withEditable(mappedComponent, editConfig), modelConfig),
   );
 
   return mappedComponent;
@@ -91,7 +91,7 @@ ComponentMapping.map = function map(
   editConfig = {
     isEmpty: () => false,
   },
-  config: ReloadableModelProperties = {}
+  config: ReloadableModelProperties = {},
 ) {
   const { injectPropsOnInit = false, ...rest } = config || {};
   const innerComponent = withMappable(component, editConfig, {
@@ -108,10 +108,10 @@ ComponentMapping.get = wrappedGetFunction;
 
 const MapTo =
   (resourceTypes: string | string[]) =>
-  (
+  <P extends MappedComponentProperties>(
     clazz: Component,
-    editConfig?: EditConfig<MappedComponentProperties>,
-    config: ReloadableModelProperties = {}
+    editConfig?: EditConfig<P>,
+    config: ReloadableModelProperties = {},
   ) =>
     // @ts-ignore
     ComponentMapping.map(resourceTypes, clazz, editConfig, config);

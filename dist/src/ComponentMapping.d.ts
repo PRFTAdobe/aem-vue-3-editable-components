@@ -31,5 +31,5 @@ declare const withModel: <P extends MappedComponentProperties>(wrappedComponent:
 declare const withEditable: <P extends MappedComponentProperties>(wrappedComponent: Component<P>, editConfig?: EditConfig<P> | undefined) => import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
     [key: string]: any;
 }>;
-declare const MapTo: (resourceTypes: string | string[]) => (clazz: Component, editConfig?: EditConfig<MappedComponentProperties>, config?: ReloadableModelProperties) => void;
+declare const MapTo: (resourceTypes: string | string[]) => <P extends MappedComponentProperties>(clazz: Component, editConfig?: EditConfig<P> | undefined, config?: ReloadableModelProperties) => void;
 export { ComponentMapping, MapTo, withEditable, withModel, withContext };
