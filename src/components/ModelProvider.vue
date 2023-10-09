@@ -10,9 +10,6 @@
     inject,
     onMounted,
     onUnmounted,
-    reactive,
-    toRef,
-    toRefs,
     useAttrs,
     useSlots,
   } from 'vue';
@@ -43,7 +40,7 @@
 
   const slots = useSlots();
   const attrs = useAttrs();
-  let propsAsRefs = toRefs(reactive(attrs));
+  let propsAsRefs = attrs;
   const isInEditor = inject('isInEditor', AuthoringUtils.isInEditor());
 
   const updateData = (cqPath: string) => {
@@ -62,7 +59,7 @@
           if (data && Object.keys(data).length > 0) {
             propsAsRefs = {
               ...propsAsRefs,
-              ...toRefs(reactive(Utils.modelToProps(data))),
+              ...Utils.modelToProps(data),
             };
 
             // Fire event once component model has been fetched and rendered to enable editing on AEM
@@ -94,7 +91,7 @@
 
   onMounted(() => {
     const cqPath = updatedCqPath();
-    propsAsRefs.cqPath = toRef(cqPath);
+    propsAsRefs.cqPath = cqPath;
 
     if (props.injectPropsOnInit) {
       updateData(cqPath);
