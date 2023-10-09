@@ -92,6 +92,7 @@
   onMounted(() => {
     const cqPath = updatedCqPath();
     propsAsRefs = { ...propsAsRefs, cqPath };
+    console.log('Props as Refs: ', propsAsRefs);
 
     if (props.injectPropsOnInit) {
       updateData(cqPath);
