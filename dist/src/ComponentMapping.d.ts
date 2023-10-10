@@ -4,10 +4,11 @@ interface ReloadForceAble {
     cqForceReload?: boolean;
 }
 export interface MappedComponentProperties extends ReloadForceAble {
-    isInEditor: boolean;
-    cqPath: string;
-    appliedCssClassNames?: string;
     aemNoDecoration?: boolean;
+    appliedCssClassNames?: string;
+    cqHierarchyType?: string;
+    cqPath: string;
+    isInEditor: boolean;
 }
 export interface EditConfig<P extends MappedComponentProperties> {
     emptyLabel?: string;

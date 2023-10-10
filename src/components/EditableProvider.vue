@@ -96,9 +96,11 @@
   <component
     :is="slots.default?.()[0] as Component"
     v-if="
-      !isInEditor &&
-      props.componentProperties.hasOwnProperty('aemNoDecoration') &&
-      props.componentProperties.aemNoDecoration
+      (!isInEditor &&
+        props.componentProperties.hasOwnProperty('aemNoDecoration') &&
+        props.componentProperties.aemNoDecoration) ||
+      (props.componentProperties.hasOwnProperty('cqHierarchyType') &&
+        props.componentProperties.cqHierarchyType === 'page')
     "
     v-bind="{ ...attrs }"
   />
