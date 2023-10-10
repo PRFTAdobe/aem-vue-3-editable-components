@@ -7,6 +7,7 @@
   } from '@adobe/aem-spa-page-model-manager';
   import {
     Component,
+    computed,
     inject,
     onMounted,
     onUnmounted,
@@ -43,8 +44,6 @@
   const attrs = useAttrs();
   const isInEditor = inject('isInEditor', AuthoringUtils.isInEditor());
 
-  const modelProperties = ref({});
-
   const updatedCqPath = () => {
     const { pagePath, itemPath, injectPropsOnInit, cqPath } = props;
     return Utils.getCQPath({
@@ -54,6 +53,19 @@
       cqPath,
     });
   };
+
+  const attributes = ref({ ...attrs, cqPath: updatedCqPath() });
+
+  const componentProperties = computed({
+    get() {
+      return {
+        ...attributes.value,
+      };
+    },
+    set(properties) {
+      attributes.value = properties;
+    },
+  });
 
   const updateData = (cqPath: string) => {
     const { pagePath, itemPath, injectPropsOnInit } = props;
@@ -69,17 +81,7 @@
       })
         .then((data: Model) => {
           if (data && Object.keys(data).length > 0) {
-            console.log({
-              ...attrs,
-              cqPath: updatedCqPath(),
-              ...modelProperties.value,
-            });
-            modelProperties.value = Utils.modelToProps(data);
-            console.log({
-              ...attrs,
-              cqPath: updatedCqPath(),
-              ...modelProperties.value,
-            });
+            componentProperties.value = { cqPath, ...Utils.modelToProps(data) };
             // Fire event once component model has been fetched and rendered to enable editing on AEM
             if (injectPropsOnInit && isInEditor) {
               PathUtils.dispatchGlobalCustomEvent(
@@ -118,10 +120,6 @@
 <template>
   <component
     :is="slots.default?.()[0] as Component"
-    v-bind="{
-      ...attrs,
-      cqPath: updatedCqPath(),
-      ...modelProperties,
-    }"
+    v-bind="componentProperties"
   />
 </template>

@@ -33,7 +33,7 @@ declare const _default: import("vue").DefineComponent<{
         }>;
     };
 }>>, {
-    editConfig: EditConfig<MappedComponentProperties>;
     componentProperties: MappedComponentProperties;
+    editConfig: EditConfig<MappedComponentProperties>;
 }, {}>;
 export default _default;
