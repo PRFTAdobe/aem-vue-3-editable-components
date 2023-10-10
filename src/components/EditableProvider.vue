@@ -27,8 +27,6 @@
     },
   });
 
-  // eslint-disable-next-line vue/no-setup-props-destructure
-  const { editConfig } = props;
   const isInEditor = inject('isInEditor', AuthoringUtils.isInEditor());
   const slots = useSlots();
   const attrs = useAttrs();
@@ -43,8 +41,8 @@
 
     editProperties['data-cq-data-path'] = componentProperties.cqPath;
 
-    if (editConfig.resourceType) {
-      editProperties['data-cq-resource-type'] = editConfig.resourceType;
+    if (props.editConfig.resourceType) {
+      editProperties['data-cq-resource-type'] = props.editConfig.resourceType;
     }
 
     return editProperties;
@@ -74,9 +72,8 @@
 
   const useEmptyPlaceholder =
     isInEditor &&
-    typeof editConfig.isEmpty === 'function' &&
-    // eslint-disable-next-line vue/no-setup-props-destructure
-    editConfig.isEmpty(props.componentProperties);
+    typeof props.editConfig.isEmpty === 'function' &&
+    props.editConfig.isEmpty(props.componentProperties);
 
   const emptyPlaceholderProps = computed(() => {
     if (!useEmptyPlaceholder) {
@@ -85,7 +82,7 @@
 
     return {
       class: 'cq-placeholder',
-      'data-emptytext': editConfig.emptyLabel,
+      'data-emptytext': props.editConfig.emptyLabel,
     };
   });
 
@@ -99,8 +96,8 @@
     :is="slots.default?.()[0] as Component"
     v-if="
       !isInEditor &&
-      componentProperties.hasOwnProperty('aemNoDecoration') &&
-      componentProperties.aemNoDecoration
+      props.componentProperties.hasOwnProperty('aemNoDecoration') &&
+      props.componentProperties.aemNoDecoration
     "
     v-bind="{ ...attrs }"
   />
