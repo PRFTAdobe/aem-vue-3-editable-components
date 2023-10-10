@@ -71,7 +71,6 @@
   });
 
   const emptyPlaceholderProps = computed(() => {
-    console.log('Is Empty as String: ', props.editConfig.isEmpty.toString());
     if (
       !(
         isInEditor &&
