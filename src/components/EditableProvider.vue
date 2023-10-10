@@ -4,6 +4,8 @@
     Component,
     computed,
     inject,
+    onMounted,
+    onUpdated,
     PropType,
     useAttrs,
     useSlots,
@@ -84,6 +86,16 @@
       class: 'cq-placeholder',
       'data-emptytext': props.editConfig.emptyLabel,
     };
+  });
+
+  onMounted(() => {
+    console.log('EditableProvider mounted properties: ', props);
+    console.log('EditableProvider mounted attributes: ', attrs);
+  });
+
+  onUpdated(() => {
+    console.log('EditableProvider updated properties: ', props);
+    console.log('EditableProvider updated attributes: ', attrs);
   });
 
   defineOptions({
