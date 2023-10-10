@@ -69,8 +69,17 @@
       })
         .then((data: Model) => {
           if (data && Object.keys(data).length > 0) {
+            console.log({
+              ...attrs,
+              cqPath: updatedCqPath(),
+              ...modelProperties.value,
+            });
             modelProperties.value = Utils.modelToProps(data);
-
+            console.log({
+              ...attrs,
+              cqPath: updatedCqPath(),
+              ...modelProperties.value,
+            });
             // Fire event once component model has been fetched and rendered to enable editing on AEM
             if (injectPropsOnInit && isInEditor) {
               PathUtils.dispatchGlobalCustomEvent(
