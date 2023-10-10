@@ -7,7 +7,6 @@
   } from '@adobe/aem-spa-page-model-manager';
   import {
     Component,
-    computed,
     inject,
     onMounted,
     onUnmounted,
@@ -55,12 +54,6 @@
       cqPath,
     });
   };
-
-  const componentProps = computed(() => ({
-    ...attrs,
-    cqPath: updatedCqPath(),
-    ...modelProperties.value,
-  }));
 
   const updateData = (cqPath: string) => {
     const { pagePath, itemPath, injectPropsOnInit } = props;
@@ -114,5 +107,12 @@
 </script>
 
 <template>
-  <component :is="slots.default?.()[0] as Component" v-bind="componentProps" />
+  <component
+    :is="slots.default?.()[0] as Component"
+    v-bind="{
+      ...attrs,
+      cqPath: updatedCqPath(),
+      ...modelProperties,
+    }"
+  />
 </template>
