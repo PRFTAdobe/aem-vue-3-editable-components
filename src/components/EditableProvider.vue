@@ -70,13 +70,15 @@
     return styleProperties;
   });
 
-  const useEmptyPlaceholder =
-    isInEditor &&
-    typeof props.editConfig.isEmpty === 'function' &&
-    props.editConfig.isEmpty(props.componentProperties);
-
   const emptyPlaceholderProps = computed(() => {
-    if (!useEmptyPlaceholder) {
+    console.log('Is Empty as String: ', props.editConfig.isEmpty.toString());
+    if (
+      !(
+        isInEditor &&
+        typeof props.editConfig.isEmpty === 'function' &&
+        props.editConfig.isEmpty(props.componentProperties)
+      )
+    ) {
       return null;
     }
 
