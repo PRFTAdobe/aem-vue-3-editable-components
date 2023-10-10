@@ -7,9 +7,11 @@
   } from '@adobe/aem-spa-page-model-manager';
   import {
     Component,
+    computed,
     inject,
     onMounted,
     onUnmounted,
+    ref,
     useAttrs,
     useSlots,
   } from 'vue';
@@ -40,8 +42,25 @@
 
   const slots = useSlots();
   const attrs = useAttrs();
-  let propsAsRefs = attrs;
   const isInEditor = inject('isInEditor', AuthoringUtils.isInEditor());
+
+  const modelProperties = ref({});
+
+  const updatedCqPath = () => {
+    const { pagePath, itemPath, injectPropsOnInit, cqPath } = props;
+    return Utils.getCQPath({
+      pagePath,
+      itemPath,
+      injectPropsOnInit,
+      cqPath,
+    });
+  };
+
+  const componentProps = computed(() => ({
+    ...attrs,
+    cqPath: updatedCqPath(),
+    ...modelProperties.value,
+  }));
 
   const updateData = (cqPath: string) => {
     const { pagePath, itemPath, injectPropsOnInit } = props;
@@ -57,10 +76,7 @@
       })
         .then((data: Model) => {
           if (data && Object.keys(data).length > 0) {
-            propsAsRefs = {
-              ...propsAsRefs,
-              ...Utils.modelToProps(data),
-            };
+            modelProperties.value = Utils.modelToProps(data);
 
             // Fire event once component model has been fetched and rendered to enable editing on AEM
             if (injectPropsOnInit && isInEditor) {
@@ -77,22 +93,10 @@
     }
   };
 
-  const updatedCqPath = () => {
-    const { pagePath, itemPath, injectPropsOnInit, cqPath } = props;
-    return Utils.getCQPath({
-      pagePath,
-      itemPath,
-      injectPropsOnInit,
-      cqPath,
-    });
-  };
-
   const updateDataListener = updateData.bind(null, updatedCqPath());
 
   onMounted(() => {
     const cqPath = updatedCqPath();
-    propsAsRefs = { ...propsAsRefs, cqPath };
-    console.log('Props as Refs: ', propsAsRefs);
 
     if (props.injectPropsOnInit) {
       updateData(cqPath);
@@ -110,8 +114,5 @@
 </script>
 
 <template>
-  <component
-    :is="slots.default?.()[0] as Component"
-    v-bind="{ ...propsAsRefs }"
-  />
+  <component :is="slots.default?.()[0] as Component" v-bind="componentProps" />
 </template>

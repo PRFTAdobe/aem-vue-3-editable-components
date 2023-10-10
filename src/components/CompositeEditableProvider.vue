@@ -23,8 +23,12 @@
 
 <template>
   <EditableProvider
-    v-bind="{ ...attrs, componentProperties: ({ ...attrs } as unknown as MappedComponentProperties), editConfig: props.editConfig }"
+    v-bind="{
+      ...attrs,
+      componentProperties: { ...attrs } as unknown as MappedComponentProperties,
+      editConfig: props.editConfig,
+    }"
   >
-    <component :is="(slots.default?.()[0] as Component)" />
+    <component :is="slots.default?.()[0] as Component" />
   </EditableProvider>
 </template>
