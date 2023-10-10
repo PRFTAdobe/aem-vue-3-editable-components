@@ -63,7 +63,7 @@
       };
     },
     set(properties) {
-      attributes.value = properties;
+      attributes.value = { ...attributes.value, ...properties };
     },
   });
 

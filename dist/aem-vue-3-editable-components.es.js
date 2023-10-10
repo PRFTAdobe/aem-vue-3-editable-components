@@ -1,6 +1,6 @@
 import { ComponentMapping as O } from "@adobe/aem-spa-component-mapping";
 import { ComponentMapping as At } from "@adobe/aem-spa-component-mapping";
-import { defineComponent as q, inject as b, useSlots as L, useAttrs as A, computed as _, unref as h, openBlock as m, createBlock as P, resolveDynamicComponent as E, normalizeProps as v, mergeProps as S, createElementBlock as y, guardReactiveProps as T, createCommentVNode as B, withCtx as U, ref as Q, onMounted as V, onUnmounted as W, toRefs as H, provide as z, h as j, normalizeClass as G, createElementVNode as J, Fragment as $, renderList as k, createVNode as X } from "vue";
+import { defineComponent as q, inject as b, useSlots as L, useAttrs as A, computed as _, unref as h, openBlock as m, createBlock as P, resolveDynamicComponent as E, normalizeProps as I, mergeProps as S, createElementBlock as y, guardReactiveProps as T, createCommentVNode as B, withCtx as U, ref as Q, onMounted as V, onUnmounted as W, toRefs as H, provide as z, h as j, normalizeClass as G, createElementVNode as J, Fragment as $, renderList as k, createVNode as X } from "vue";
 import { AuthoringUtils as N, ModelManager as R, PathUtils as Y } from "@adobe/aem-spa-page-model-manager";
 function Z(o) {
   return o && o.__esModule && Object.prototype.hasOwnProperty.call(o, "default") ? o.default : o;
@@ -23,7 +23,7 @@ var D = { exports: {} };
     if (n !== "string")
       throw new TypeError("Expected a string, got a ".concat(n));
   }, f = function(e, n) {
-    for (var l = "", I = 0, g = -1, w = 0, M, C = 0; C <= e.length; ++C) {
+    for (var l = "", v = 0, g = -1, w = 0, M, C = 0; C <= e.length; ++C) {
       if (C < e.length)
         M = e.charCodeAt(C);
       else {
@@ -34,21 +34,21 @@ var D = { exports: {} };
       if (M === a) {
         if (!(g === C - 1 || w === 1))
           if (g !== C - 1 && w === 2) {
-            if (l.length < 2 || I !== 2 || l.charCodeAt(l.length - 1) !== c || l.charCodeAt(l.length - 2) !== c) {
+            if (l.length < 2 || v !== 2 || l.charCodeAt(l.length - 1) !== c || l.charCodeAt(l.length - 2) !== c) {
               if (l.length > 2) {
                 var F = l.lastIndexOf("/");
                 if (F !== l.length - 1) {
-                  F === -1 ? (l = "", I = 0) : (l = l.slice(0, F), I = l.length - 1 - l.lastIndexOf("/")), g = C, w = 0;
+                  F === -1 ? (l = "", v = 0) : (l = l.slice(0, F), v = l.length - 1 - l.lastIndexOf("/")), g = C, w = 0;
                   continue;
                 }
               } else if (l.length === 2 || l.length === 1) {
-                l = "", I = 0, g = C, w = 0;
+                l = "", v = 0, g = C, w = 0;
                 continue;
               }
             }
-            n && (l.length > 0 ? l += "/.." : l = "..", I = 2);
+            n && (l.length > 0 ? l += "/.." : l = "..", v = 2);
           } else
-            l.length > 0 ? l += "/" + e.slice(g + 1, C) : l = e.slice(g + 1, C), I = C - g - 1;
+            l.length > 0 ? l += "/" + e.slice(g + 1, C) : l = e.slice(g + 1, C), v = C - g - 1;
         g = C, w = 0;
       } else
         M === c && w !== -1 ? ++w : w = -1;
@@ -65,8 +65,8 @@ var D = { exports: {} };
     var n = e;
     if (n.length === 0)
       return ".";
-    var l = n.charCodeAt(0) === a, I = n.charCodeAt(n.length - 1) === a;
-    return n = i(n), n = f(n, !l), n.length === 0 && !l && (n = "."), n.length > 0 && I && (n += "/"), l ? "/" + n : n;
+    var l = n.charCodeAt(0) === a, v = n.charCodeAt(n.length - 1) === a;
+    return n = i(n), n = f(n, !l), n.length === 0 && !l && (n = "."), n.length > 0 && v && (n += "/"), l ? "/" + n : n;
   }, p = u;
   t.default = p, o.exports = t.default;
 })(D, D.exports);
@@ -124,12 +124,12 @@ const tt = /* @__PURE__ */ Z(K), x = {
     } : null);
     return (u, p) => {
       var s, e, n, l;
-      return !h(r) && t.componentProperties.hasOwnProperty("aemNoDecoration") && t.componentProperties.aemNoDecoration ? (m(), P(E((e = (s = h(a)).default) == null ? void 0 : e.call(s)[0]), v(S({ key: 0 }, { ...h(c) })), null, 16)) : (m(), y("div", v(S({ key: 1 }, { ...d.value, ...f.value })), [
-        (m(), P(E((l = (n = h(a)).default) == null ? void 0 : l.call(n)[0]), v(T({
+      return !h(r) && t.componentProperties.hasOwnProperty("aemNoDecoration") && t.componentProperties.aemNoDecoration ? (m(), P(E((e = (s = h(a)).default) == null ? void 0 : e.call(s)[0]), I(S({ key: 0 }, { ...h(c) })), null, 16)) : (m(), y("div", I(S({ key: 1 }, { ...d.value, ...f.value })), [
+        (m(), P(E((l = (n = h(a)).default) == null ? void 0 : l.call(n)[0]), I(T({
           ...h(c),
           componentProperties: t.componentProperties
         })), null, 16)),
-        i.value ? (m(), y("div", v(S({ key: 0 }, i.value)), null, 16)) : B("", !0)
+        i.value ? (m(), y("div", I(S({ key: 0 }, i.value)), null, 16)) : B("", !0)
       ], 16));
     };
   }
@@ -146,7 +146,7 @@ const tt = /* @__PURE__ */ Z(K), x = {
   },
   setup(o) {
     const t = o, r = L(), a = A();
-    return (c, d) => (m(), P(et, v(T({
+    return (c, d) => (m(), P(et, I(T({
       ...h(a),
       componentProperties: { ...h(a) },
       editConfig: t.editConfig
@@ -201,12 +201,12 @@ const tt = /* @__PURE__ */ Z(K), x = {
         };
       },
       set(s) {
-        f.value = s;
+        f.value = { ...f.value, ...s };
       }
     }), u = (s) => {
-      const { pagePath: e, itemPath: n, injectPropsOnInit: l } = t, I = s || t.cqPath || e && x.getCQPath({ pagePath: e, itemPath: n, injectPropsOnInit: l });
-      I && R.getData({
-        path: I,
+      const { pagePath: e, itemPath: n, injectPropsOnInit: l } = t, v = s || t.cqPath || e && x.getCQPath({ pagePath: e, itemPath: n, injectPropsOnInit: l });
+      v && R.getData({
+        path: v,
         forceReload: t.cqForceReload
       }).then((g) => {
         g && Object.keys(g).length > 0 && (i.value = { cqPath: s, ...x.modelToProps(g) }, l && c && Y.dispatchGlobalCustomEvent(
@@ -224,7 +224,7 @@ const tt = /* @__PURE__ */ Z(K), x = {
       R.removeListener(t.cqPath, p);
     }), (s, e) => {
       var n, l;
-      return m(), P(E((l = (n = h(r)).default) == null ? void 0 : l.call(n)[0]), v(T(i.value)), null, 16);
+      return m(), P(E((l = (n = h(r)).default) == null ? void 0 : l.call(n)[0]), I(T(i.value)), null, 16);
     };
   }
 }), rt = /* @__PURE__ */ q({
@@ -258,7 +258,7 @@ const tt = /* @__PURE__ */ Z(K), x = {
     const t = L(), r = A(), a = b("componentMapping", new O()), c = b("isInEditor", N.isInEditor());
     return z("isInEditor", c), z("componentMapping", a), (d, f) => {
       var i, u;
-      return m(), P(E((u = (i = h(t)).default) == null ? void 0 : u.call(i)[0]), v(T({ ...h(r) })), null, 16);
+      return m(), P(E((u = (i = h(t)).default) == null ? void 0 : u.call(i)[0]), I(T({ ...h(r) })), null, 16);
     };
   }
 }), at = (o) => j(st, {}, () => [j(o)]), ct = (o, t) => j(rt, { modelConfig: t }, () => [j(o)]), pt = (o, t) => j(ot, { editConfig: t }, () => [j(o)]), it = (o, t, r) => {
@@ -286,7 +286,7 @@ O.map = function(t, r, a = {
   return lt.call(O, t, i), i;
 };
 O.get = dt;
-const vt = (o) => (t, r, a = {}) => (
+const It = (o) => (t, r, a = {}) => (
   // @ts-ignore
   O.map(o, t, r, a)
 ), bt = (o, t, r, a) => {
@@ -478,11 +478,11 @@ const vt = (o) => (t, r, a = {}) => (
     });
     return (p, s) => !h(r) && t.aemNoDecoration ? (m(!0), y($, { key: 0 }, k(i.value, (e) => (m(), P(E(e), {
       key: e.toString()
-    }))), 128)) : (m(), y("div", v(S({ key: 1 }, { ...f.value })), [
+    }))), 128)) : (m(), y("div", I(S({ key: 1 }, { ...f.value })), [
       (m(!0), y($, null, k(i.value, (e) => (m(), P(E(e), {
         key: e.toString()
       }))), 128)),
-      h(r) ? (m(), P(gt, v(S({ key: 0 }, u.value)), null, 16)) : B("", !0)
+      h(r) ? (m(), P(gt, I(S({ key: 0 }, u.value)), null, 16)) : B("", !0)
     ], 16));
   }
 }), Ct = /* @__PURE__ */ q({
@@ -625,7 +625,7 @@ const vt = (o) => (t, r, a = {}) => (
       };
       return r && (p["data-cq-data-path"] = t.cqPath), p;
     });
-    return (p, s) => (m(), y("div", v(T(u.value)), [
+    return (p, s) => (m(), y("div", I(T(u.value)), [
       (m(!0), y($, null, k(f.value, (e) => (m(), P(E(e), {
         key: e.toString()
       }))), 128)),
@@ -692,7 +692,7 @@ export {
   gt as ContainerPlaceholder,
   st as ContextProvider,
   et as EditableProvider,
-  vt as MapTo,
+  It as MapTo,
   nt as ModelProvider,
   Ot as Page,
   jt as ResponsiveGrid,
