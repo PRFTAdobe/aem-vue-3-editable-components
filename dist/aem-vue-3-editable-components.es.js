@@ -124,7 +124,7 @@ const K = /* @__PURE__ */ Y(Z), x = {
     } : null);
     return (m, d) => {
       var s, t, o, i;
-      return !f(r) && e.componentProperties.hasOwnProperty("aemNoDecoration") && e.componentProperties.aemNoDecoration || e.componentProperties.hasOwnProperty("cqHierarchyType") && e.componentProperties.cqHierarchyType === "page" ? (h(), P(E((t = (s = f(c)).default) == null ? void 0 : t.call(s)[0]), I(A({ key: 0 }, { ...f(a) })), null, 16)) : (h(), _("div", I(A({ key: 1 }, { ...l.value, ...u.value })), [
+      return !f(r) && e.componentProperties.hasOwnProperty("aemNoDecoration") && e.componentProperties.aemNoDecoration || e.componentProperties.hasOwnProperty("cqHierarchyType") && e.componentProperties.cqHierarchyType === "page" ? (h(), P(E((t = (s = f(c)).default) == null ? void 0 : t.call(s)[0]), I(A({ key: 0 }, { ...f(a), containerProps: e.containerProps })), null, 16)) : (h(), _("div", I(A({ key: 1 }, { ...l.value, ...u.value })), [
         (h(), P(E((i = (o = f(c)).default) == null ? void 0 : i.call(o)[0]), I($({
           ...f(a),
           componentProperties: e.componentProperties

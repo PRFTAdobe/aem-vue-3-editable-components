@@ -102,7 +102,7 @@
       (props.componentProperties.hasOwnProperty('cqHierarchyType') &&
         props.componentProperties.cqHierarchyType === 'page')
     "
-    v-bind="{ ...attrs }"
+    v-bind="{ ...attrs, containerProps: props.containerProps }"
   />
   <div v-else v-bind="{ ...editProps, ...styleProps }">
     <component
