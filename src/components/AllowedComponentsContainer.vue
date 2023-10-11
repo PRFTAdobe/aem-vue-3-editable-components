@@ -23,6 +23,10 @@
       type: String,
       default: 'No allowed components',
     },
+    aemNoDecoration: {
+      type: Boolean,
+      default: false,
+    },
     // eslint-disable-next-line vue/require-default-prop
     allowedComponents: {
       type: Object as PropType<AllowedComponents>,
@@ -99,6 +103,7 @@
   />
   <Container
     v-else
+    :aem-no-decoration="props.aemNoDecoration"
     :cq-items="props.cqItems"
     :cq-items-order="props.cqItemsOrder"
     :cq-path="props.cqPath"

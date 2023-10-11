@@ -16,6 +16,10 @@ declare const _default: import("vue").DefineComponent<{
         type: StringConstructor;
         default: string;
     };
+    aemNoDecoration: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
     allowedComponents: {
         type: PropType<AllowedComponents>;
     };
@@ -54,6 +58,10 @@ declare const _default: import("vue").DefineComponent<{
         type: StringConstructor;
         default: string;
     };
+    aemNoDecoration: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
     allowedComponents: {
         type: PropType<AllowedComponents>;
     };
@@ -89,6 +97,7 @@ declare const _default: import("vue").DefineComponent<{
     };
 }>>, {
     cqPath: string;
+    aemNoDecoration: boolean;
     cqItems: {
         [key: string]: Model;
     };

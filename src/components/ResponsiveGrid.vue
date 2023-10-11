@@ -4,6 +4,10 @@
   import { AuthoringUtils } from '@adobe/aem-spa-page-model-manager';
 
   const props = defineProps({
+    aemNoDecoration: {
+      type: Boolean,
+      default: false,
+    },
     cqPath: {
       type: String,
       default: '',
@@ -85,6 +89,7 @@
 
 <template>
   <AllowedComponentsContainer
+    :aem-no-decoration="props.aemNoDecoration"
     :cq-path="props.cqPath"
     :get-container-props="getContainerProps"
     :get-item-component-props="getItemComponentProps"
