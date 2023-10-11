@@ -1,5 +1,3 @@
-import { PropType } from 'vue';
-
 const componentClassNames = (
   baseCssClass: string | undefined,
   appliedCssClassNames: string | undefined,
@@ -32,10 +30,6 @@ const componentProperties = (baseCssClass: string) => ({
   baseCssClass: {
     type: String,
     default: baseCssClass,
-  },
-  containerProps: {
-    type: Object as PropType<{ [key: string]: string }>,
-    default: () => {},
   },
   // eslint-disable-next-line vue/require-default-prop
   id: {

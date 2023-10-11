@@ -1,4 +1,3 @@
-import { PropType } from 'vue';
 declare const componentClassNames: (baseCssClass: string | undefined, appliedCssClassNames: string | undefined, containerProps: {
     [p: string]: string;
 } | undefined, isInEditor: boolean) => (string | {
@@ -11,12 +10,6 @@ declare const componentProperties: (baseCssClass: string) => {
     baseCssClass: {
         type: StringConstructor;
         default: string;
-    };
-    containerProps: {
-        type: PropType<{
-            [key: string]: string;
-        }>;
-        default: () => void;
     };
     id: {
         type: StringConstructor;
