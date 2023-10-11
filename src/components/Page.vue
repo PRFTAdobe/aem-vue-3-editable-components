@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-  import { computed, h, inject, PropType, VNode } from 'vue';
+  import { computed, h, inject, PropType, useAttrs, VNode } from 'vue';
   import { AuthoringUtils, Model } from '@adobe/aem-spa-page-model-manager';
   import { ComponentMapping } from '@adobe/aem-spa-component-mapping';
   import Utils from '@/utils/Utils';
@@ -15,6 +15,8 @@
     ':path': string;
     ':children'?: { [key: string]: PageModel };
   }
+
+  const attrs = useAttrs();
 
   const isInEditor = inject('isInEditor', AuthoringUtils.isInEditor());
   const componentMapping = inject('componentMapping', new ComponentMapping());
@@ -111,8 +113,12 @@
   });
 
   const containerProps = computed(() => {
+    const containerClassNames = ['aem-page'];
+    if (attrs.cssClassNames) {
+      containerClassNames.push(...(attrs.cssClassNames as string).split(' '));
+    }
     const containerProperties: { [key: string]: string } = {
-      class: 'aem-page',
+      class: containerClassNames.join(' '),
     };
 
     if (isInEditor) {
