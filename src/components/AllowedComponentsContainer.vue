@@ -104,6 +104,7 @@
     :get-container-props="props.getContainerProps"
     :get-item-component-props="props.getItemComponentProps"
     :get-placeholder-props="props.getPlaceholderProps"
+    :is-in-editor="computedIsInEditor"
     v-bind="{ ...attrs }"
   />
 </template>
