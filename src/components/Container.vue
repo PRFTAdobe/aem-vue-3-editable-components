@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-  import { computed, h, inject, PropType, VNode } from 'vue';
+  import { computed, h, inject, PropType, useAttrs, VNode } from 'vue';
   import { AuthoringUtils, Model } from '@adobe/aem-spa-page-model-manager';
   import { ComponentMapping } from '@adobe/aem-spa-component-mapping';
   import Utils from '@/utils/Utils';
@@ -49,6 +49,8 @@
       default: undefined,
     },
   });
+
+  const attrs = useAttrs();
 
   const computedIsInEditor =
     typeof props.isInEditor !== 'undefined'
@@ -143,6 +145,7 @@
       :is="childComponent"
       v-for="childComponent of childComponents"
       :key="childComponent.toString()"
+      v-bind="{ ...attrs }"
     />
   </template>
   <div v-else v-bind="{ ...containerProps }">
@@ -150,6 +153,7 @@
       :is="childComponent"
       v-for="childComponent of childComponents"
       :key="childComponent.toString()"
+      v-bind="{ ...attrs }"
     />
     <ContainerPlaceholder v-if="computedIsInEditor" v-bind="placeholderProps" />
   </div>
