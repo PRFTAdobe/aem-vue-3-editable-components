@@ -7,6 +7,7 @@
 
   interface ChildProperties {
     cqType?: string;
+    aemNoDecoration?: boolean;
   }
 
   const props = defineProps({
@@ -108,6 +109,10 @@
         if (itemProps && typeof itemProps.cqType !== 'undefined') {
           const itemComponent = componentMapping.get(itemProps.cqType) as VNode;
 
+          if (props.aemNoDecoration) {
+            itemProps.aemNoDecoration = props.aemNoDecoration;
+          }
+
           if (itemComponent) {
             childComponentNodes.push(
               connectComponentWithItem(itemComponent, itemProps, itemKey),
@@ -143,7 +148,6 @@
       :is="childComponent"
       v-for="childComponent of childComponents"
       :key="childComponent.toString()"
-      :aem-no-decoration="props.aemNoDecoration"
     />
   </template>
   <div v-else v-bind="{ ...containerProps }">
@@ -151,7 +155,6 @@
       :is="childComponent"
       v-for="childComponent of childComponents"
       :key="childComponent.toString()"
-      :aem-no-decoration="props.aemNoDecoration"
     />
     <ContainerPlaceholder v-if="computedIsInEditor" v-bind="placeholderProps" />
   </div>

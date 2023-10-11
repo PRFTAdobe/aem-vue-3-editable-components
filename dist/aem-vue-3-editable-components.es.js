@@ -456,7 +456,7 @@ const Ie = (n) => (e, r, c = {}) => (
         );
         if (t && typeof t.cqType < "u") {
           const o = c.get(t.cqType);
-          o && d.push(
+          e.aemNoDecoration && (t.aemNoDecoration = e.aemNoDecoration), o && d.push(
             l(o, t, s)
           );
         }
@@ -466,13 +466,11 @@ const Ie = (n) => (e, r, c = {}) => (
       placeholderClassNames: "new section"
     });
     return (d, s) => !h(r) && e.aemNoDecoration ? (u(!0), C(k, { key: 0 }, M(p.value, (t) => (u(), P(b(t), {
-      key: t.toString(),
-      "aem-no-decoration": e.aemNoDecoration
-    }, null, 8, ["aem-no-decoration"]))), 128)) : (u(), C("div", I(w({ key: 1 }, { ...f.value })), [
+      key: t.toString()
+    }))), 128)) : (u(), C("div", I(w({ key: 1 }, { ...f.value })), [
       (u(!0), C(k, null, M(p.value, (t) => (u(), P(b(t), {
-        key: t.toString(),
-        "aem-no-decoration": e.aemNoDecoration
-      }, null, 8, ["aem-no-decoration"]))), 128)),
+        key: t.toString()
+      }))), 128)),
       h(r) ? (u(), P(Pe, I(w({ key: 0 }, m.value)), null, 16)) : z("", !0)
     ], 16));
   }
@@ -671,7 +669,7 @@ const Ie = (n) => (e, r, c = {}) => (
       return p.placeholderClassNames = m.join(" "), p;
     }, f = (p) => {
       const m = {};
-      return e.columnClassNames && e.columnClassNames[p] && (m.class = e.columnClassNames[p]), e.aemNoDecoration && (m["data-no-decoration"] = !0), m;
+      return e.columnClassNames && e.columnClassNames[p] && (m.class = e.columnClassNames[p]), m;
     };
     return (p, m) => (u(), P(ye, w({
       "aem-no-decoration": e.aemNoDecoration,
