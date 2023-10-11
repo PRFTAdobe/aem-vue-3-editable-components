@@ -98,6 +98,7 @@
     :title="props.title"
   />
   <Container
+    v-else
     :cq-items="props.cqItems"
     :cq-items-order="props.cqItemsOrder"
     :cq-path="props.cqPath"
