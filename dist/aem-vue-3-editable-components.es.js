@@ -1,6 +1,6 @@
 import { ComponentMapping as E } from "@adobe/aem-spa-component-mapping";
-import { ComponentMapping as Ne } from "@adobe/aem-spa-component-mapping";
-import { defineComponent as q, inject as v, useSlots as T, useAttrs as S, computed as _, unref as h, openBlock as u, createBlock as P, resolveDynamicComponent as b, normalizeProps as I, mergeProps as N, createElementBlock as C, guardReactiveProps as L, createCommentVNode as z, withCtx as U, ref as Q, onMounted as H, onUnmounted as W, toRefs as V, provide as B, h as O, normalizeClass as G, createElementVNode as J, Fragment as k, renderList as M } from "vue";
+import { ComponentMapping as we } from "@adobe/aem-spa-component-mapping";
+import { defineComponent as q, inject as v, useSlots as T, useAttrs as S, computed as _, unref as h, openBlock as u, createBlock as P, resolveDynamicComponent as b, normalizeProps as I, mergeProps as w, createElementBlock as C, guardReactiveProps as L, createCommentVNode as z, withCtx as U, ref as Q, onMounted as H, onUnmounted as W, toRefs as V, provide as B, h as O, normalizeClass as G, createElementVNode as J, Fragment as k, renderList as M } from "vue";
 import { AuthoringUtils as A, ModelManager as F, PathUtils as X } from "@adobe/aem-spa-page-model-manager";
 function Y(n) {
   return n && n.__esModule && Object.prototype.hasOwnProperty.call(n, "default") ? n.default : n;
@@ -23,7 +23,7 @@ var R = { exports: {} };
     if (o !== "string")
       throw new TypeError("Expected a string, got a ".concat(o));
   }, f = function(t, o) {
-    for (var i = "", g = 0, j = -1, w = 0, $, y = 0; y <= t.length; ++y) {
+    for (var i = "", g = 0, j = -1, N = 0, $, y = 0; y <= t.length; ++y) {
       if (y < t.length)
         $ = t.charCodeAt(y);
       else {
@@ -32,26 +32,26 @@ var R = { exports: {} };
         $ = c;
       }
       if ($ === c) {
-        if (!(j === y - 1 || w === 1))
-          if (j !== y - 1 && w === 2) {
+        if (!(j === y - 1 || N === 1))
+          if (j !== y - 1 && N === 2) {
             if (i.length < 2 || g !== 2 || i.charCodeAt(i.length - 1) !== a || i.charCodeAt(i.length - 2) !== a) {
               if (i.length > 2) {
                 var D = i.lastIndexOf("/");
                 if (D !== i.length - 1) {
-                  D === -1 ? (i = "", g = 0) : (i = i.slice(0, D), g = i.length - 1 - i.lastIndexOf("/")), j = y, w = 0;
+                  D === -1 ? (i = "", g = 0) : (i = i.slice(0, D), g = i.length - 1 - i.lastIndexOf("/")), j = y, N = 0;
                   continue;
                 }
               } else if (i.length === 2 || i.length === 1) {
-                i = "", g = 0, j = y, w = 0;
+                i = "", g = 0, j = y, N = 0;
                 continue;
               }
             }
             o && (i.length > 0 ? i += "/.." : i = "..", g = 2);
           } else
             i.length > 0 ? i += "/" + t.slice(j + 1, y) : i = t.slice(j + 1, y), g = y - j - 1;
-        j = y, w = 0;
+        j = y, N = 0;
       } else
-        $ === a && w !== -1 ? ++w : w = -1;
+        $ === a && N !== -1 ? ++N : N = -1;
     }
     return i;
   }, p = function(t) {
@@ -124,12 +124,12 @@ const K = /* @__PURE__ */ Y(Z), x = {
     } : null);
     return (m, d) => {
       var s, t, o, i;
-      return !h(r) && e.componentProperties.hasOwnProperty("aemNoDecoration") && e.componentProperties.aemNoDecoration || e.componentProperties.hasOwnProperty("cqHierarchyType") && e.componentProperties.cqHierarchyType === "page" ? (u(), P(b((t = (s = h(c)).default) == null ? void 0 : t.call(s)[0]), I(N({ key: 0 }, { ...h(a) })), null, 16)) : (u(), C("div", I(N({ key: 1 }, { ...l.value, ...f.value })), [
+      return !h(r) && e.componentProperties.hasOwnProperty("aemNoDecoration") && e.componentProperties.aemNoDecoration || e.componentProperties.hasOwnProperty("cqHierarchyType") && e.componentProperties.cqHierarchyType === "page" ? (u(), P(b((t = (s = h(c)).default) == null ? void 0 : t.call(s)[0]), I(w({ key: 0 }, { ...h(a) })), null, 16)) : (u(), C("div", I(w({ key: 1 }, { ...l.value, ...f.value })), [
         (u(), P(b((i = (o = h(c)).default) == null ? void 0 : i.call(o)[0]), I(L({
           ...h(a),
           componentProperties: e.componentProperties
         })), null, 16)),
-        p.value ? (u(), C("div", I(N({ key: 0 }, p.value)), null, 16)) : z("", !0)
+        p.value ? (u(), C("div", I(w({ key: 0 }, p.value)), null, 16)) : z("", !0)
       ], 16));
     };
   }
@@ -232,7 +232,7 @@ const K = /* @__PURE__ */ Y(Z), x = {
   },
   setup(n) {
     const e = n, r = T(), c = S(), { modelConfig: a } = V(e), l = c.cqForceReload || a.value.forceReload, { injectPropsOnInit: f } = a.value;
-    return (p, m) => (u(), P(oe, N({
+    return (p, m) => (u(), P(oe, w({
       "cq-force-reload": h(l),
       "inject-props-on-init": h(f)
     }, { ...h(c) }), {
@@ -472,11 +472,11 @@ const Ie = (n) => (e, r, c = {}) => (
     });
     return (d, s) => !h(r) && e.aemNoDecoration ? (u(!0), C(k, { key: 0 }, M(p.value, (t) => (u(), P(b(t), {
       key: t.toString()
-    }))), 128)) : (u(), C("div", I(N({ key: 1 }, { ...f.value })), [
+    }))), 128)) : (u(), C("div", I(w({ key: 1 }, { ...f.value })), [
       (u(!0), C(k, null, M(p.value, (t) => (u(), P(b(t), {
         key: t.toString()
       }))), 128)),
-      h(r) ? (u(), P(Pe, I(N({ key: 0 }, m.value)), null, 16)) : z("", !0)
+      h(r) ? (u(), P(Pe, I(w({ key: 0 }, m.value)), null, 16)) : z("", !0)
     ], 16));
   }
 }), ye = /* @__PURE__ */ q({
@@ -543,7 +543,7 @@ const Ie = (n) => (e, r, c = {}) => (
         "empty-label": e._allowedComponentPlaceholderListEmptyLabel,
         "placeholder-props": c.value,
         title: e.title
-      }, null, 8, ["components", "cq-path", "empty-label", "placeholder-props", "title"])) : (u(), P(ge, N({
+      }, null, 8, ["components", "cq-path", "empty-label", "placeholder-props", "title"])) : (u(), P(ge, w({
         key: 1,
         "aem-no-decoration": e.aemNoDecoration,
         "cq-items": e.cqItems,
@@ -674,9 +674,9 @@ const Ie = (n) => (e, r, c = {}) => (
       return p.placeholderClassNames = m.join(" "), p;
     }, f = (p) => {
       const m = {};
-      return e.columnClassNames && e.columnClassNames[p] && (m.class = e.columnClassNames[p]), m;
+      return e.columnClassNames && e.columnClassNames[p] && (m.class = e.columnClassNames[p]), e.aemNoDecoration && (m["data-no-decoration"] = !0), m;
     };
-    return (p, m) => (u(), P(ye, N({
+    return (p, m) => (u(), P(ye, w({
       "aem-no-decoration": e.aemNoDecoration,
       "cq-path": e.cqPath,
       "get-container-props": a,
@@ -690,7 +690,7 @@ export {
   me as AllowedComponentPlaceholder,
   fe as AllowedComponentPlaceholderList,
   ye as AllowedComponentsContainer,
-  Ne as ComponentMapping,
+  we as ComponentMapping,
   te as CompositeEditableProvider,
   ne as CompositeModelProvider,
   ge as Container,

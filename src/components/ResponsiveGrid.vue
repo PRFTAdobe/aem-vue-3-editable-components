@@ -73,10 +73,15 @@
   const getItemComponentProps = (itemKey: string) => {
     const itemComponentProperties: {
       class?: string;
+      'data-no-decoration'?: boolean;
     } = {};
 
     if (props.columnClassNames && props.columnClassNames[itemKey]) {
       itemComponentProperties.class = props.columnClassNames[itemKey];
+    }
+
+    if (props.aemNoDecoration) {
+      itemComponentProperties['data-no-decoration'] = true;
     }
 
     return itemComponentProperties;
