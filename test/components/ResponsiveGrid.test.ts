@@ -71,6 +71,7 @@ describe('ResponsiveGrid ->', () => {
           this.appliedCssClassNames,
           this.containerProps,
           this.isInEditor,
+          this.aemNoDecoration,
         );
       },
     },
