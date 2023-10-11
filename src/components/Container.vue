@@ -143,14 +143,7 @@
 </script>
 
 <template>
-  <template v-if="!computedIsInEditor && props.aemNoDecoration">
-    <component
-      :is="childComponent"
-      v-for="childComponent of childComponents"
-      :key="childComponent.toString()"
-    />
-  </template>
-  <div v-else v-bind="{ ...containerProps }">
+  <div v-bind="{ ...containerProps }">
     <component
       :is="childComponent"
       v-for="childComponent of childComponents"
