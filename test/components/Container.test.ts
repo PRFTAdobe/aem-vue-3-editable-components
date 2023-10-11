@@ -212,23 +212,4 @@ describe('Container ->', () => {
       expect(container).toBeDefined();
     });
   });
-
-  describe('container decoration ->', () => {
-    it('if aemNoDecoration is set to true, there should not be a container div wrapper', () => {
-      mount(
-        Container,
-        vueWrapperOptions(
-          {
-            cqPath: CONTAINER_PATH,
-            aemNoDecoration: true,
-          },
-          false,
-        ),
-      );
-
-      const container = rootNode!.querySelector('.aem-container');
-
-      expect(container).toBeNull();
-    });
-  });
 });

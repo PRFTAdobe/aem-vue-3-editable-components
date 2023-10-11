@@ -186,7 +186,7 @@ const K = /* @__PURE__ */ Y(Z), x = {
     }
   },
   setup(n) {
-    const e = n, r = k(), a = w(), c = v("isInEditor", S.isInEditor()), l = Q(a), m = () => {
+    const e = n, r = k(), a = w(), c = v("isInEditor", S.isInEditor()), l = Q({ ...a }), m = () => {
       const { pagePath: d, itemPath: s, injectPropsOnInit: t, cqPath: o } = e;
       return x.getCQPath({
         pagePath: d,
