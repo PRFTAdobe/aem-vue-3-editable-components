@@ -1,5 +1,5 @@
 import { PropType } from 'vue';
-declare const componentClassNames: (baseCssClass: string | undefined, appliedCssClassNames: string | undefined, containerProps: {
+declare const componentClassNames: (baseCssClass: string | undefined, appliedCssClassNames: string | undefined, cssClassNames: string | undefined, containerProps: {
     [p: string]: string;
 } | undefined, isInEditor: boolean, aemNoDecoration: boolean) => (string | {
     [key: string]: boolean;
@@ -21,6 +21,9 @@ declare const componentProperties: (baseCssClass: string) => {
             [key: string]: string;
         }>;
         default: () => void;
+    };
+    cssClassNames: {
+        type: StringConstructor;
     };
     id: {
         type: StringConstructor;

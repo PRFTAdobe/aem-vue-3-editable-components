@@ -69,6 +69,7 @@ describe('ResponsiveGrid ->', () => {
         return componentClassNames(
           this.baseCssClass,
           this.appliedCssClassNames,
+          this.cssClassNames,
           this.containerProps,
           this.isInEditor,
           this.aemNoDecoration,

@@ -3,6 +3,7 @@ import { PropType } from 'vue';
 const componentClassNames = (
   baseCssClass: string | undefined,
   appliedCssClassNames: string | undefined,
+  cssClassNames: string | undefined,
   containerProps: { [p: string]: string } | undefined,
   isInEditor: boolean,
   aemNoDecoration: boolean,
@@ -18,6 +19,9 @@ const componentClassNames = (
   }
   if (appliedCssClassNames) {
     className.push(appliedCssClassNames);
+  }
+  if (cssClassNames) {
+    className.push(...(cssClassNames as string).split(' '));
   }
   const containerPropsClass = containerProps?.class;
   if (aemNoDecoration && containerPropsClass && !isInEditor) {
@@ -41,6 +45,9 @@ const componentProperties = (baseCssClass: string) => ({
   containerProps: {
     type: Object as PropType<{ [key: string]: string }>,
     default: () => {},
+  },
+  cssClassNames: {
+    type: String,
   },
   // eslint-disable-next-line vue/require-default-prop
   id: {
