@@ -9,6 +9,10 @@ interface PageModel extends Model {
     };
 }
 declare const _default: import("vue").DefineComponent<{
+    aemNoDecoration: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
     cqChildren: {
         type: PropType<{
             [key: string]: PageModel;
@@ -30,6 +34,10 @@ declare const _default: import("vue").DefineComponent<{
         default: string;
     };
 }, {}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+    aemNoDecoration: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
     cqChildren: {
         type: PropType<{
             [key: string]: PageModel;
@@ -52,6 +60,7 @@ declare const _default: import("vue").DefineComponent<{
     };
 }>>, {
     cqPath: string;
+    aemNoDecoration: boolean;
     cqItems: {
         [key: string]: Model;
     };

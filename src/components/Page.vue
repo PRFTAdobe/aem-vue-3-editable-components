@@ -7,6 +7,7 @@
   interface ChildProperties {
     cqType?: string;
     cqPath?: string;
+    aemNoDecoration?: boolean;
   }
 
   interface PageModel extends Model {
@@ -22,6 +23,10 @@
   const componentMapping = inject('componentMapping', new ComponentMapping());
 
   const props = defineProps({
+    aemNoDecoration: {
+      type: Boolean,
+      default: false,
+    },
     // eslint-disable-next-line vue/require-default-prop
     cqChildren: {
       type: Object as PropType<{ [key: string]: PageModel }>,
@@ -76,6 +81,10 @@
 
         if (itemProps && typeof itemProps.cqType !== 'undefined') {
           const itemComponent = componentMapping.get(itemProps.cqType) as VNode;
+
+          if (props.aemNoDecoration) {
+            itemProps.aemNoDecoration = props.aemNoDecoration;
+          }
 
           if (itemComponent) {
             childComponentNodes.push(
