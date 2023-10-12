@@ -35,7 +35,7 @@ declare const _default: import("vue").DefineComponent<{
         type: StringConstructor;
     };
 }>>, {
-    injectPropsOnInit: boolean;
     cqForceReload: boolean;
+    injectPropsOnInit: boolean;
 }, {}>;
 export default _default;

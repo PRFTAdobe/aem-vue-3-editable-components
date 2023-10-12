@@ -70,13 +70,13 @@
     return placeholderProperties;
   };
 
-  const getItemComponentProps = (itemKey: string) => {
+  const getItemComponentProps = (componentName: string) => {
     const itemComponentProperties: {
       class?: string;
     } = {};
 
-    if (props.columnClassNames && props.columnClassNames[itemKey]) {
-      itemComponentProperties.class = props.columnClassNames[itemKey];
+    if (props.columnClassNames && props.columnClassNames[componentName]) {
+      itemComponentProperties.class = props.columnClassNames[componentName];
     }
 
     return itemComponentProperties;

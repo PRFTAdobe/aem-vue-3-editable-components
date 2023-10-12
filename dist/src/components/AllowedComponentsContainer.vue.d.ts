@@ -97,12 +97,12 @@ declare const _default: import("vue").DefineComponent<{
     };
 }>>, {
     cqPath: string;
+    isInEditor: boolean;
     aemNoDecoration: boolean;
     cqItems: {
         [key: string]: Model;
     };
     cqItemsOrder: string[];
-    isInEditor: boolean;
     _allowedComponentPlaceholderListEmptyLabel: string;
 }, {}>;
 export default _default;

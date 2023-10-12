@@ -1,14 +1,8 @@
 <script lang="ts" setup>
-  import { computed, h, inject, PropType, useAttrs, VNode } from 'vue';
+  import { computed, inject, PropType, useAttrs, VNode } from 'vue';
   import { AuthoringUtils, Model } from '@adobe/aem-spa-page-model-manager';
   import { ComponentMapping } from '@adobe/aem-spa-component-mapping';
   import Utils from '@/utils/Utils';
-
-  interface ChildProperties {
-    cqType?: string;
-    cqPath?: string;
-    aemNoDecoration?: boolean;
-  }
 
   interface PageModel extends Model {
     ':type': string;
@@ -48,78 +42,21 @@
     },
   });
 
-  const getItemPath = (itemKey: string) =>
-    props.cqPath?.length > 0
-      ? `${props.cqPath}/jcr:content/${itemKey}`
-      : itemKey;
+  const childComponents = computed((): VNode[] =>
+    Utils.getChildComponents(
+      props.cqPath,
+      props.cqItems,
+      props.cqItemsOrder,
+      props.aemNoDecoration,
+      () => ({}),
+      true,
+      componentMapping,
+    ),
+  );
 
-  const connectComponentWithItem = (
-    itemComponent: VNode,
-    itemProps: ChildProperties,
-    itemKey: string,
-  ) => {
-    const itemPath = getItemPath(itemKey);
-
-    return h(itemComponent, {
-      ...itemProps,
-      cqPath: itemPath,
-      containerProps: {},
-    });
-  };
-
-  const childComponents = computed((): VNode[] => {
-    const childComponentNodes: VNode[] = [];
-
-    if (
-      Object.keys(props.cqItems).length > 0 &&
-      props.cqItemsOrder.length > 0
-    ) {
-      props.cqItemsOrder.forEach((itemKey) => {
-        const itemProps = Utils.modelToProps(
-          props.cqItems[itemKey],
-        ) as ChildProperties;
-
-        if (itemProps && typeof itemProps.cqType !== 'undefined') {
-          const itemComponent = componentMapping.get(itemProps.cqType) as VNode;
-
-          if (props.aemNoDecoration) {
-            itemProps.aemNoDecoration = props.aemNoDecoration;
-          }
-
-          if (itemComponent) {
-            childComponentNodes.push(
-              connectComponentWithItem(itemComponent, itemProps, itemKey),
-            );
-          }
-        }
-      });
-    }
-
-    return childComponentNodes;
-  });
-
-  const childPages = computed((): VNode[] => {
-    const pages: VNode[] = [];
-    if (Object.keys(props.cqChildren).length === 0) {
-      return pages;
-    }
-
-    Object.keys(props.cqChildren).forEach((itemKey) => {
-      const itemProps = Utils.modelToProps(
-        props.cqChildren[itemKey],
-      ) as ChildProperties;
-      if (itemProps && typeof itemProps.cqType !== 'undefined') {
-        const itemComponent = componentMapping.get(itemProps.cqType) as VNode;
-        if (itemComponent) {
-          pages.push(
-            h(itemComponent, { ...itemProps, cqPath: itemProps.cqPath }),
-          );
-        }
-      }
-    });
-
-    return pages;
-  });
+  const childPages = computed((): VNode[] =>
+    Utils.getChildPages(props.cqChildren, componentMapping),
+  );
 
   const containerProps = computed(() => {
     const containerClassNames = ['aem-page'];

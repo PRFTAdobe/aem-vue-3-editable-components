@@ -43,7 +43,7 @@ declare const _default: import("vue").DefineComponent<{
     };
 }>>, {
     cqPath: string;
-    aemNoDecoration: boolean;
     isInEditor: boolean;
+    aemNoDecoration: boolean;
 }, {}>;
 export default _default;

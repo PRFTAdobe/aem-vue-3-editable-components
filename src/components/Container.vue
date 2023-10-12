@@ -1,13 +1,12 @@
 <script lang="ts" setup>
-  import { computed, h, inject, PropType, VNode } from 'vue';
+  import { computed, inject, PropType, VNode } from 'vue';
   import { AuthoringUtils, Model } from '@adobe/aem-spa-page-model-manager';
   import { ComponentMapping } from '@adobe/aem-spa-component-mapping';
   import Utils from '@/utils/Utils';
   import ContainerPlaceholder from '@/components/ContainerPlaceholder.vue';
 
-  interface ChildProperties {
-    cqType?: string;
-    aemNoDecoration?: boolean;
+  interface ContainerProps {
+    (componentName?: string | undefined): { class?: string | undefined };
   }
 
   const props = defineProps({
@@ -57,26 +56,6 @@
       : inject('isInEditor', AuthoringUtils.isInEditor());
   const componentMapping = inject('componentMapping', new ComponentMapping());
 
-  const getItemPath = (itemKey: string) =>
-    props.cqPath?.length > 0 ? `${props.cqPath}/${itemKey}` : itemKey;
-
-  const connectComponentWithItem = (
-    itemComponent: VNode,
-    itemProps: ChildProperties,
-    itemKey: string,
-  ) => {
-    const itemPath = getItemPath(itemKey);
-
-    return h(itemComponent, {
-      ...itemProps,
-      cqPath: itemPath,
-      containerProps:
-        typeof props.getItemComponentProps === 'function'
-          ? props.getItemComponentProps(itemKey)
-          : {},
-    });
-  };
-
   const containerProps = computed(() => {
     let containerProperties: { [key: string]: string } = {};
     if (typeof props.getContainerProps === 'function') {
@@ -94,36 +73,19 @@
     return containerProperties;
   });
 
-  const childComponents = computed((): VNode[] => {
-    const childComponentNodes: VNode[] = [];
-
-    if (
-      Object.keys(props.cqItems).length > 0 &&
-      props.cqItemsOrder.length > 0
-    ) {
-      props.cqItemsOrder.forEach((itemKey) => {
-        const itemProps = Utils.modelToProps(
-          props.cqItems[itemKey],
-        ) as ChildProperties;
-
-        if (itemProps && typeof itemProps.cqType !== 'undefined') {
-          const itemComponent = componentMapping.get(itemProps.cqType) as VNode;
-
-          if (props.aemNoDecoration) {
-            itemProps.aemNoDecoration = props.aemNoDecoration;
-          }
-
-          if (itemComponent) {
-            childComponentNodes.push(
-              connectComponentWithItem(itemComponent, itemProps, itemKey),
-            );
-          }
-        }
-      });
-    }
-
-    return childComponentNodes;
-  });
+  const childComponents = computed((): VNode[] =>
+    Utils.getChildComponents(
+      props.cqPath,
+      props.cqItems,
+      props.cqItemsOrder,
+      props.aemNoDecoration,
+      typeof props.getItemComponentProps === 'function'
+        ? (props.getItemComponentProps as ContainerProps)
+        : () => ({}),
+      false,
+      componentMapping,
+    ),
+  );
 
   const placeholderProps = computed(() => {
     if (typeof props.getPlaceholderProps === 'function') {
