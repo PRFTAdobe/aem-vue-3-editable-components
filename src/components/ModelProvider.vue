@@ -43,7 +43,9 @@
   const attrs = useAttrs();
   const isInEditor = inject('isInEditor', AuthoringUtils.isInEditor());
 
-  const modelProperties = ref(attrs);
+  const modelProperties = ref({});
+
+  Object.assign(modelProperties.value, attrs);
 
   const updatedCqPath = () => {
     const { pagePath, itemPath, injectPropsOnInit, cqPath } = props;
