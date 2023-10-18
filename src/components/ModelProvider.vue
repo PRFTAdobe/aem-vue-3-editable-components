@@ -42,7 +42,7 @@
   const slots = useSlots();
   const isInEditor = inject('isInEditor', AuthoringUtils.isInEditor());
 
-  const modelProperties = ref(useAttrs());
+  const modelProperties = ref({});
 
   const updatedCqPath = () => {
     const { pagePath, itemPath, injectPropsOnInit, cqPath } = props;
@@ -68,10 +68,7 @@
       })
         .then((data: Model) => {
           if (data && Object.keys(data).length > 0) {
-            modelProperties.value = {
-              ...modelProperties.value,
-              ...Utils.modelToProps(data),
-            };
+            Object.assign(modelProperties.value, Utils.modelToProps(data));
             // Fire event once component model has been fetched and rendered to enable editing on AEM
             if (injectPropsOnInit && isInEditor) {
               PathUtils.dispatchGlobalCustomEvent(
@@ -110,9 +107,14 @@
 <template>
   <component
     :is="slots.default?.()[0] as Component"
-    v-bind="{
-      cqPath: updatedCqPath(),
-      ...modelProperties,
-    }"
+    v-bind="
+      Object.assign(
+        {
+          cqPath: updatedCqPath(),
+        },
+        useAttrs(),
+        modelProperties,
+      )
+    "
   />
 </template>

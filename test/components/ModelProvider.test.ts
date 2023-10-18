@@ -1,5 +1,5 @@
 import { defineComponent, h } from 'vue';
-import { mount } from '@vue/test-utils';
+import { mount, shallowMount } from '@vue/test-utils';
 import { waitFor } from '@testing-library/dom';
 import { ModelManager, PathUtils } from '@adobe/aem-spa-page-model-manager';
 import { withModel } from '@/ComponentMapping';
@@ -197,7 +197,7 @@ describe('ModelProvider', () => {
         .spyOn(PathUtils, 'dispatchGlobalCustomEvent')
         .mockImplementation();
 
-      mount(ModelProvider, {
+      shallowMount(ModelProvider, {
         propsData: {
           injectPropsOnInit: true,
           pagePath: TEST_PAGE_PATH,
