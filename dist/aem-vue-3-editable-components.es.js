@@ -233,7 +233,7 @@ const K = /* @__PURE__ */ Y(Z), x = {
     }
   },
   setup(t) {
-    const e = t, o = k(), n = v("isInEditor", A.isInEditor()), r = Q({}), a = () => {
+    const e = t, o = k(), n = v("isInEditor", A.isInEditor()), r = Q(w()), a = () => {
       const { pagePath: c, itemPath: u, injectPropsOnInit: d, cqPath: p } = e;
       return x.getCQPath({
         pagePath: c,
@@ -262,15 +262,10 @@ const K = /* @__PURE__ */ Y(Z), x = {
       F.removeListener(e.cqPath, s);
     }), (c, u) => {
       var d, p;
-      return f(), P(I((p = (d = h(o)).default) == null ? void 0 : p.call(d)[0]), q($(
-        Object.assign(
-          {
-            cqPath: a()
-          },
-          w(),
-          r.value
-        )
-      )), null, 16);
+      return f(), P(I((p = (d = h(o)).default) == null ? void 0 : p.call(d)[0]), q($({
+        cqPath: a(),
+        ...r.value
+      })), null, 16);
     };
   }
 }), ne = /* @__PURE__ */ y({
