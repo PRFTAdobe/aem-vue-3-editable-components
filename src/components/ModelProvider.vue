@@ -68,7 +68,10 @@
       })
         .then((data: Model) => {
           if (data && Object.keys(data).length > 0) {
-            Object.assign(modelProperties.value, Utils.modelToProps(data));
+            modelProperties.value = {
+              ...modelProperties.value,
+              ...Utils.modelToProps(data),
+            };
             // Fire event once component model has been fetched and rendered to enable editing on AEM
             if (injectPropsOnInit && isInEditor) {
               PathUtils.dispatchGlobalCustomEvent(

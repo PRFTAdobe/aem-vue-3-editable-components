@@ -1,4 +1,4 @@
-import { h as N, defineComponent as y, inject as v, useSlots as k, useAttrs as w, computed as C, unref as h, openBlock as f, createBlock as P, resolveDynamicComponent as I, normalizeProps as q, mergeProps as S, createElementBlock as _, guardReactiveProps as $, createCommentVNode as z, withCtx as U, ref as Q, onMounted as H, onUnmounted as W, toRefs as V, provide as R, normalizeClass as G, createElementVNode as J, Fragment as L, renderList as D } from "vue";
+import { h as j, defineComponent as y, inject as v, useSlots as k, useAttrs as w, computed as C, unref as h, openBlock as f, createBlock as P, resolveDynamicComponent as I, normalizeProps as q, mergeProps as S, createElementBlock as _, guardReactiveProps as $, createCommentVNode as z, withCtx as U, ref as Q, onMounted as H, onUnmounted as W, toRefs as V, provide as R, normalizeClass as G, createElementVNode as J, Fragment as L, renderList as D } from "vue";
 import { ComponentMapping as b } from "@adobe/aem-spa-component-mapping";
 import { ComponentMapping as we } from "@adobe/aem-spa-component-mapping";
 import { AuthoringUtils as A, ModelManager as F, PathUtils as X } from "@adobe/aem-spa-page-model-manager";
@@ -23,7 +23,7 @@ var B = { exports: {} };
     if (m !== "string")
       throw new TypeError("Expected a string, got a ".concat(m));
   }, i = function(p, m) {
-    for (var l = "", E = 0, O = -1, j = 0, M, g = 0; g <= p.length; ++g) {
+    for (var l = "", E = 0, O = -1, N = 0, M, g = 0; g <= p.length; ++g) {
       if (g < p.length)
         M = p.charCodeAt(g);
       else {
@@ -32,26 +32,26 @@ var B = { exports: {} };
         M = n;
       }
       if (M === n) {
-        if (!(O === g - 1 || j === 1))
-          if (O !== g - 1 && j === 2) {
+        if (!(O === g - 1 || N === 1))
+          if (O !== g - 1 && N === 2) {
             if (l.length < 2 || E !== 2 || l.charCodeAt(l.length - 1) !== r || l.charCodeAt(l.length - 2) !== r) {
               if (l.length > 2) {
                 var T = l.lastIndexOf("/");
                 if (T !== l.length - 1) {
-                  T === -1 ? (l = "", E = 0) : (l = l.slice(0, T), E = l.length - 1 - l.lastIndexOf("/")), O = g, j = 0;
+                  T === -1 ? (l = "", E = 0) : (l = l.slice(0, T), E = l.length - 1 - l.lastIndexOf("/")), O = g, N = 0;
                   continue;
                 }
               } else if (l.length === 2 || l.length === 1) {
-                l = "", E = 0, O = g, j = 0;
+                l = "", E = 0, O = g, N = 0;
                 continue;
               }
             }
             m && (l.length > 0 ? l += "/.." : l = "..", E = 2);
           } else
             l.length > 0 ? l += "/" + p.slice(O + 1, g) : l = p.slice(O + 1, g), E = g - O - 1;
-        O = g, j = 0;
+        O = g, N = 0;
       } else
-        M === r && j !== -1 ? ++j : j = -1;
+        M === r && N !== -1 ? ++N : N = -1;
     }
     return l;
   }, s = function(p) {
@@ -78,7 +78,7 @@ const K = /* @__PURE__ */ Y(Z), x = {
   },
   connectComponentWithItem(t, e, o, n, r, a) {
     const i = this.getItemPath(o, n, a);
-    return N(t, {
+    return j(t, {
       ...e,
       cqPath: i,
       containerProps: r(o)
@@ -114,7 +114,7 @@ const K = /* @__PURE__ */ Y(Z), x = {
       if (r && typeof r.cqType < "u") {
         const a = e.get(r.cqType);
         a && o.push(
-          N(a, { ...r, cqPath: r.cqPath })
+          j(a, { ...r, cqPath: r.cqPath })
         );
       }
     }), o;
@@ -247,7 +247,10 @@ const K = /* @__PURE__ */ Y(Z), x = {
         path: m,
         forceReload: e.cqForceReload
       }).then((l) => {
-        l && Object.keys(l).length > 0 && (Object.assign(r.value, x.modelToProps(l)), p && n && X.dispatchGlobalCustomEvent(
+        l && Object.keys(l).length > 0 && (r.value = {
+          ...r.value,
+          ...x.modelToProps(l)
+        }, p && n && X.dispatchGlobalCustomEvent(
           "cq-async-content-loaded",
           {}
         ));
@@ -302,7 +305,7 @@ const K = /* @__PURE__ */ Y(Z), x = {
       return f(), P(I((c = (s = h(e)).default) == null ? void 0 : c.call(s)[0]), q($({ ...h(o) })), null, 16);
     };
   }
-}), se = (t) => N(re, {}, () => [N(t)]), ae = (t, e) => N(ne, { modelConfig: e }, () => [N(t)]), ce = (t, e) => N(te, { editConfig: e }, () => [N(t)]), ie = (t, e, o) => {
+}), se = (t) => j(re, {}, () => [j(t)]), ae = (t, e) => j(ne, { modelConfig: e }, () => [j(t)]), ce = (t, e) => j(te, { editConfig: e }, () => [j(t)]), ie = (t, e, o) => {
   const {
     injectPropsOnInit: n = !0,
     forceReload: r = !1,
