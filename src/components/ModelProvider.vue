@@ -11,7 +11,6 @@
     onMounted,
     onUnmounted,
     ref,
-    useAttrs,
     useSlots,
   } from 'vue';
   import Utils from '@/utils/Utils';
@@ -40,7 +39,6 @@
   });
 
   const slots = useSlots();
-  const attrs = useAttrs();
   const isInEditor = inject('isInEditor', AuthoringUtils.isInEditor());
 
   const modelProperties = ref({});
@@ -109,7 +107,6 @@
   <component
     :is="slots.default?.()[0] as Component"
     v-bind="{
-      ...attrs,
       cqPath: updatedCqPath(),
       ...modelProperties,
     }"
