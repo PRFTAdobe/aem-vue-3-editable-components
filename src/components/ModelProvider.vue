@@ -11,6 +11,7 @@
     onMounted,
     onUnmounted,
     ref,
+    useAttrs,
     useSlots,
   } from 'vue';
   import Utils from '@/utils/Utils';
@@ -41,7 +42,7 @@
   const slots = useSlots();
   const isInEditor = inject('isInEditor', AuthoringUtils.isInEditor());
 
-  const modelProperties = ref({});
+  const modelProperties = ref(useAttrs());
 
   const updatedCqPath = () => {
     const { pagePath, itemPath, injectPropsOnInit, cqPath } = props;
