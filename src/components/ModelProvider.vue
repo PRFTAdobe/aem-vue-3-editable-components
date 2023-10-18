@@ -45,8 +45,6 @@
 
   const modelProperties = ref({});
 
-  Object.assign(modelProperties.value, attrs);
-
   const updatedCqPath = () => {
     const { pagePath, itemPath, injectPropsOnInit, cqPath } = props;
     return Utils.getCQPath({
@@ -111,6 +109,7 @@
   <component
     :is="slots.default?.()[0] as Component"
     v-bind="{
+      ...attrs,
       cqPath: updatedCqPath(),
       ...modelProperties,
     }"
