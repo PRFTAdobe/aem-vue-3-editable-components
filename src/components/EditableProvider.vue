@@ -52,7 +52,7 @@
     const styleProperties: { [key: string]: string } = {};
     const { componentProperties } = props;
 
-    const { appliedCssClassNames } = componentProperties;
+    const { appliedCssClassNames, cqType } = componentProperties;
 
     const stylePropsClass = [];
 
@@ -62,6 +62,10 @@
 
     if (props?.containerProps?.class) {
       stylePropsClass.push(props.containerProps.class);
+    }
+
+    if (cqType && cqType?.endsWith('/container')) {
+      stylePropsClass.push('aem-editable');
     }
 
     if (stylePropsClass.length) {
