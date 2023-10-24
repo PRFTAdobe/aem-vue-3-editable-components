@@ -102,11 +102,22 @@
   defineOptions({
     inheritAttrs: false,
   });
+
+  const printBoundedProperties = (boundedProperties: { cqPath: string }) => {
+    console.log(boundedProperties);
+    return true;
+  };
 </script>
 
 <template>
   <component
     :is="slots.default?.()[0] as Component"
+    :data-bounded="
+      printBoundedProperties({
+        cqPath: updatedCqPath(),
+        ...modelProperties,
+      })
+    "
     v-bind="{
       cqPath: updatedCqPath(),
       ...modelProperties,
