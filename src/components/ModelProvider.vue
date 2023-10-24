@@ -7,6 +7,7 @@
   } from '@adobe/aem-spa-page-model-manager';
   import {
     Component,
+    computed,
     inject,
     onMounted,
     onUnmounted,
@@ -87,9 +88,13 @@
 
   const updateDataListener = updateData.bind(null, updatedCqPath());
 
+  const computedModelProperties = computed(() => ({
+    cqPath: updatedCqPath(),
+    ...modelProperties,
+  }));
+
   onMounted(() => {
     const cqPath = updatedCqPath();
-    Object.assign(modelProperties, { cqPath });
 
     if (props.injectPropsOnInit) {
       updateData(cqPath);
@@ -104,17 +109,11 @@
   defineOptions({
     inheritAttrs: false,
   });
-
-  const printBoundedProperties = (boundedProperties: { cqPath?: string }) => {
-    console.log(boundedProperties);
-    return true;
-  };
 </script>
 
 <template>
   <component
     :is="slots.default?.()[0] as Component"
-    :data-bounded="printBoundedProperties(modelProperties)"
-    v-bind="modelProperties"
+    v-bind="computedModelProperties"
   />
 </template>
