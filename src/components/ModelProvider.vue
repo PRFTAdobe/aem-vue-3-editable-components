@@ -42,7 +42,8 @@
   const slots = useSlots();
   const isInEditor = inject('isInEditor', AuthoringUtils.isInEditor());
 
-  const modelProperties = reactive(useAttrs());
+  const modelProperties = reactive({});
+  Object.assign(modelProperties, useAttrs());
 
   const updatedCqPath = () => {
     const { pagePath, itemPath, injectPropsOnInit, cqPath } = props;

@@ -1,9 +1,9 @@
 import { mount } from '@vue/test-utils';
 import { waitFor } from '@testing-library/dom';
 import { ModelManager, PathUtils } from '@adobe/aem-spa-page-model-manager';
+import { defineComponent, h } from 'vue';
 import { withModel } from '@/ComponentMapping';
 import ModelProvider from '@/components/ModelProvider.vue';
-import { defineComponent, h } from 'vue';
 
 describe('ModelProvider', () => {
   const INNER_COMPONENT_ID = 'innerContent';
