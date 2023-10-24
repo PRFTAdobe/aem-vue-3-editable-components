@@ -99,6 +99,7 @@
     :get-item-component-props="getItemComponentProps"
     :get-placeholder-props="getPlaceholderProps"
     :is-in-editor="computedIsInEditor"
+    :title="props.title"
     v-bind="{ ...attrs }"
   />
 </template>

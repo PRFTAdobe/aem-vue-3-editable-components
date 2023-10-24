@@ -705,8 +705,9 @@ const ve = (t) => (e, o, n = {}) => (
       "get-container-props": r,
       "get-item-component-props": p,
       "get-placeholder-props": a,
-      "is-in-editor": h(n)
-    }, { ...h(o) }), null, 16, ["aem-no-decoration", "cq-path", "is-in-editor"]));
+      "is-in-editor": h(n),
+      title: e.title
+    }, { ...h(o) }), null, 16, ["aem-no-decoration", "cq-path", "is-in-editor", "title"]));
   }
 });
 export {
