@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils';
 import { waitFor } from '@testing-library/dom';
-import { ModelManager } from '@adobe/aem-spa-page-model-manager';
+import { ModelManager, PathUtils } from '@adobe/aem-spa-page-model-manager';
 import { withModel } from '@/ComponentMapping';
 import ModelProvider from '@/components/ModelProvider.vue';
 import { defineComponent, h } from 'vue';
@@ -191,6 +191,45 @@ describe('ModelProvider', () => {
       // then
       await waitFor(() => expect(console.error).toHaveBeenCalledWith(error));
     });
+
+    it('should fire event to reload editables when in editor', async () => {
+      const dispatchEventSpy: jest.SpyInstance = jest
+        .spyOn(PathUtils, 'dispatchGlobalCustomEvent')
+        .mockImplementation();
+
+      mount(ModelProvider, {
+        propsData: {
+          injectPropsOnInit: true,
+          pagePath: TEST_PAGE_PATH,
+        },
+        slots: {
+          default: [getChildComponent()],
+        },
+        global: {
+          provide: {
+            isInEditor: true,
+          },
+        },
+        attachTo: rootNode,
+      });
+
+      expect(getDataSpy).toHaveBeenCalledWith({
+        path: TEST_PAGE_PATH,
+        forceReload: false,
+      });
+      const childNode = rootNode!.querySelector(`#${INNER_COMPONENT_ID}`);
+
+      expect(childNode).toBeDefined();
+
+      await waitFor(() =>
+        expect(dispatchEventSpy).toHaveBeenCalledWith(
+          'cq-async-content-loaded',
+          {},
+        ),
+      );
+
+      dispatchEventSpy.mockReset();
+    });
   });
 
   describe('Get data ->', () => {
@@ -369,6 +408,46 @@ describe('ModelProvider', () => {
 
       // then
       await waitFor(() => expect(console.error).toHaveBeenCalledWith(error));
+    });
+
+    it('should fire event to reload editables when in editor', async () => {
+      const dispatchEventSpy: jest.SpyInstance = jest
+        .spyOn(PathUtils, 'dispatchGlobalCustomEvent')
+        .mockImplementation();
+
+      const CompositeModelProvider = withModel(getChildComponent(), {
+        injectPropsOnInit: true,
+      });
+
+      mount(CompositeModelProvider, {
+        propsData: {
+          pagePath: TEST_PAGE_PATH,
+        },
+        global: {
+          provide: {
+            isInEditor: true,
+          },
+        },
+        attachTo: rootNode,
+      });
+
+      expect(getDataSpy).toHaveBeenCalledWith({
+        path: TEST_PAGE_PATH,
+        forceReload: false,
+      });
+
+      const childNode = rootNode!.querySelector(`#${INNER_COMPONENT_ID}`);
+
+      expect(childNode).toBeDefined();
+
+      await waitFor(() =>
+        expect(dispatchEventSpy).toHaveBeenCalledWith(
+          'cq-async-content-loaded',
+          {},
+        ),
+      );
+
+      dispatchEventSpy.mockReset();
     });
   });
 

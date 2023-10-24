@@ -1,4 +1,4 @@
-import { h as N, defineComponent as y, inject as v, useSlots as k, useAttrs as w, computed as C, unref as h, openBlock as f, createBlock as P, resolveDynamicComponent as I, normalizeProps as q, mergeProps as S, createElementBlock as _, guardReactiveProps as $, createCommentVNode as z, withCtx as U, ref as Q, onMounted as W, onUnmounted as H, toRefs as V, provide as R, normalizeClass as G, createElementVNode as J, Fragment as L, renderList as D } from "vue";
+import { h as N, defineComponent as y, inject as v, useSlots as k, useAttrs as w, computed as C, unref as h, openBlock as f, createBlock as P, resolveDynamicComponent as I, normalizeProps as q, mergeProps as S, createElementBlock as _, guardReactiveProps as $, createCommentVNode as z, withCtx as U, reactive as Q, onMounted as W, onUnmounted as H, toRefs as V, provide as R, normalizeClass as G, createElementVNode as J, Fragment as L, renderList as D } from "vue";
 import { ComponentMapping as b } from "@adobe/aem-spa-component-mapping";
 import { ComponentMapping as we } from "@adobe/aem-spa-component-mapping";
 import { AuthoringUtils as A, ModelManager as F, PathUtils as X } from "@adobe/aem-spa-page-model-manager";
@@ -233,7 +233,7 @@ const K = /* @__PURE__ */ Y(Z), x = {
     }
   },
   setup(t) {
-    const e = t, o = k(), n = v("isInEditor", A.isInEditor()), r = Q(w()), a = () => {
+    const e = t, o = k(), n = v("isInEditor", A.isInEditor()), r = Q({ ...w() }), a = () => {
       const { pagePath: i, itemPath: u, injectPropsOnInit: m, cqPath: l } = e;
       return x.getCQPath({
         pagePath: i,
@@ -247,7 +247,7 @@ const K = /* @__PURE__ */ Y(Z), x = {
         path: d,
         forceReload: e.cqForceReload
       }).then((c) => {
-        c && Object.keys(c).length > 0 && (Object.assign(r.value, x.modelToProps(c)), l && n && X.dispatchGlobalCustomEvent(
+        c && Object.keys(c).length > 0 && (Object.assign(r, x.modelToProps(c)), l && n && X.dispatchGlobalCustomEvent(
           "cq-async-content-loaded",
           {}
         ));
@@ -264,7 +264,7 @@ const K = /* @__PURE__ */ Y(Z), x = {
       var m, l;
       return f(), P(I((l = (m = h(o)).default) == null ? void 0 : l.call(m)[0]), q($({
         cqPath: a(),
-        ...r.value
+        ...r
       })), null, 16);
     };
   }
