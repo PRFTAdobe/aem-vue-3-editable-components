@@ -89,6 +89,7 @@
 
   onMounted(() => {
     const cqPath = updatedCqPath();
+    Object.assign(modelProperties, { cqPath });
 
     if (props.injectPropsOnInit) {
       updateData(cqPath);
@@ -104,8 +105,7 @@
     inheritAttrs: false,
   });
 
-  const printBoundedProperties = (boundedProperties: { cqPath: string }) => {
-    console.log(useAttrs());
+  const printBoundedProperties = (boundedProperties: { cqPath?: string }) => {
     console.log(boundedProperties);
     return true;
   };
@@ -114,15 +114,7 @@
 <template>
   <component
     :is="slots.default?.()[0] as Component"
-    :data-bounded="
-      printBoundedProperties({
-        cqPath: updatedCqPath(),
-        ...modelProperties,
-      })
-    "
-    v-bind="{
-      cqPath: updatedCqPath(),
-      ...modelProperties,
-    }"
+    :data-bounded="printBoundedProperties(modelProperties)"
+    v-bind="modelProperties"
   />
 </template>
