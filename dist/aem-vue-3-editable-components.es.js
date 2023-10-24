@@ -1,4 +1,4 @@
-import { h as N, defineComponent as y, inject as v, useSlots as k, useAttrs as w, computed as C, unref as h, openBlock as f, createBlock as P, resolveDynamicComponent as I, normalizeProps as q, mergeProps as S, createElementBlock as _, guardReactiveProps as $, createCommentVNode as z, withCtx as U, reactive as Q, onMounted as W, onUnmounted as H, toRefs as V, provide as R, normalizeClass as G, createElementVNode as J, Fragment as L, renderList as D } from "vue";
+import { h as N, defineComponent as y, inject as v, useSlots as L, useAttrs as w, computed as C, unref as h, openBlock as f, createBlock as P, resolveDynamicComponent as I, normalizeProps as q, mergeProps as S, createElementBlock as _, guardReactiveProps as $, createCommentVNode as z, withCtx as U, reactive as Q, onMounted as W, onUnmounted as H, toRefs as V, provide as R, normalizeClass as G, createElementVNode as J, Fragment as k, renderList as D } from "vue";
 import { ComponentMapping as b } from "@adobe/aem-spa-component-mapping";
 import { ComponentMapping as we } from "@adobe/aem-spa-component-mapping";
 import { AuthoringUtils as A, ModelManager as F, PathUtils as X } from "@adobe/aem-spa-page-model-manager";
@@ -158,7 +158,7 @@ const K = /* @__PURE__ */ Y(Z), x = {
     }
   },
   setup(t) {
-    const e = t, o = v("isInEditor", A.isInEditor()), n = k(), r = w(), a = C(() => {
+    const e = t, o = v("isInEditor", A.isInEditor()), n = L(), r = w(), a = C(() => {
       const i = {}, { componentProperties: u } = e;
       return o && (i["data-cq-data-path"] = u.cqPath, e.editConfig.resourceType && (i["data-cq-resource-type"] = e.editConfig.resourceType)), i;
     }), p = C(() => {
@@ -192,7 +192,7 @@ const K = /* @__PURE__ */ Y(Z), x = {
     }
   },
   setup(t) {
-    const e = t, o = k(), n = w();
+    const e = t, o = L(), n = w();
     return (r, a) => (f(), P(ee, q($({
       ...h(n),
       componentProperties: { ...h(n) },
@@ -233,7 +233,7 @@ const K = /* @__PURE__ */ Y(Z), x = {
     }
   },
   setup(t) {
-    const e = t, o = k(), n = v("isInEditor", A.isInEditor()), r = Q(w()), a = () => {
+    const e = t, o = L(), n = v("isInEditor", A.isInEditor()), r = Q(w()), a = () => {
       const { pagePath: i, itemPath: u, injectPropsOnInit: m, cqPath: l } = e;
       return x.getCQPath({
         pagePath: i,
@@ -278,7 +278,7 @@ const K = /* @__PURE__ */ Y(Z), x = {
     }
   },
   setup(t) {
-    const e = t, o = k(), n = w(), { modelConfig: r } = V(e), a = n.cqForceReload || r.value.forceReload, { injectPropsOnInit: p } = r.value;
+    const e = t, o = L(), n = w(), { modelConfig: r } = V(e), a = n.cqForceReload || r.value.forceReload, { injectPropsOnInit: p } = r.value;
     return (s, i) => (f(), P(oe, S({
       "cq-force-reload": h(a),
       "inject-props-on-init": h(p)
@@ -296,7 +296,7 @@ const K = /* @__PURE__ */ Y(Z), x = {
   inheritAttrs: !1,
   __name: "ContextProvider",
   setup(t) {
-    const e = k(), o = w(), n = v("componentMapping", new b()), r = v("isInEditor", A.isInEditor());
+    const e = L(), o = w(), n = v("componentMapping", new b()), r = v("isInEditor", A.isInEditor());
     return R("isInEditor", r), R("componentMapping", n), (a, p) => {
       var s, i;
       return f(), P(I((i = (s = h(e)).default) == null ? void 0 : i.call(s)[0]), q($({ ...h(o) })), null, 16);
@@ -421,7 +421,7 @@ const ve = (t) => (e, o, n = {}) => (
           "data-text": o.value,
           class: "aem-AllowedComponent--title"
         }, null, 8, ue),
-        (f(!0), _(L, null, D(e.components, (p) => (f(), P(me, {
+        (f(!0), _(k, null, D(e.components, (p) => (f(), P(me, {
           key: p.path,
           "empty-label": p.title,
           path: p.path
@@ -512,7 +512,7 @@ const ve = (t) => (e, o, n = {}) => (
       placeholderClassNames: "new section"
     });
     return (s, i) => (f(), _("div", q($({ ...r.value })), [
-      (f(!0), _(L, null, D(a.value, (u) => (f(), P(I(u), {
+      (f(!0), _(k, null, D(a.value, (u) => (f(), P(I(u), {
         key: u.toString()
       }))), 128)),
       h(o) ? (f(), P(Pe, q(S({ key: 0 }, p.value)), null, 16)) : z("", !0)
@@ -645,10 +645,10 @@ const ve = (t) => (e, o, n = {}) => (
       return n && (u["data-cq-data-path"] = e.cqPath), u;
     });
     return (i, u) => (f(), _("div", q($(s.value)), [
-      (f(!0), _(L, null, D(a.value, (m) => (f(), P(I(m), {
+      (f(!0), _(k, null, D(a.value, (m) => (f(), P(I(m), {
         key: m.toString()
       }))), 128)),
-      (f(!0), _(L, null, D(p.value, (m) => (f(), P(I(m), {
+      (f(!0), _(k, null, D(p.value, (m) => (f(), P(I(m), {
         key: m.toString()
       }))), 128))
     ], 16));
@@ -676,6 +676,10 @@ const ve = (t) => (e, o, n = {}) => (
     isInEditor: {
       type: Boolean,
       default: void 0
+    },
+    title: {
+      type: String,
+      default: "Layout Container"
     }
   },
   setup(t) {
