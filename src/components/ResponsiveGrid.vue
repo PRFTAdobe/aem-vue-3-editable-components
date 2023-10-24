@@ -24,6 +24,10 @@
       type: Boolean,
       default: undefined,
     },
+    title: {
+      type: String,
+      default: 'Layout Container',
+    },
   });
 
   const attrs = useAttrs();

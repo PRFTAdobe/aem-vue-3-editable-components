@@ -38,7 +38,7 @@
   const listLabel = computed(() =>
     props.components && props.components.length > 0
       ? props.title
-      : props.emptyLabel
+      : props.emptyLabel,
   );
 
   defineOptions({
