@@ -104,6 +104,7 @@
   });
 
   const printBoundedProperties = (boundedProperties: { cqPath: string }) => {
+    console.log(useAttrs());
     console.log(boundedProperties);
     return true;
   };
