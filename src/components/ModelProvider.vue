@@ -42,9 +42,7 @@
   const slots = useSlots();
   const isInEditor = inject('isInEditor', AuthoringUtils.isInEditor());
 
-  const modelProperties = reactive({});
-  Object.assign(modelProperties, useAttrs());
-
+  const modelProperties = reactive(useAttrs());
   const updatedCqPath = () => {
     const { pagePath, itemPath, injectPropsOnInit, cqPath } = props;
     return Utils.getCQPath({
@@ -87,8 +85,6 @@
 
   const updateDataListener = updateData.bind(null, updatedCqPath());
 
-  Object.assign(modelProperties, { cqPath: updatedCqPath() });
-
   onMounted(() => {
     const cqPath = updatedCqPath();
 
@@ -108,5 +104,11 @@
 </script>
 
 <template>
-  <component :is="slots.default?.()[0] as Component" v-bind="modelProperties" />
+  <component
+    :is="slots.default?.()[0] as Component"
+    v-bind="{
+      cqPath: updatedCqPath(),
+      ...modelProperties,
+    }"
+  />
 </template>
