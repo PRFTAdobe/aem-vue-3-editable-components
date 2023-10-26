@@ -1,5 +1,13 @@
 <script lang="ts" setup>
-  import { computed, inject, PropType, useAttrs, VNode } from 'vue';
+  import {
+    computed,
+    inject,
+    onMounted,
+    onUpdated,
+    PropType,
+    useAttrs,
+    VNode,
+  } from 'vue';
   import { AuthoringUtils, Model } from '@adobe/aem-spa-page-model-manager';
   import { ComponentMapping } from '@adobe/aem-spa-component-mapping';
   import Utils from '@/utils/Utils';
@@ -71,6 +79,18 @@
       containerProperties['data-cq-data-path'] = props.cqPath;
     }
     return containerProperties;
+  });
+
+  onMounted(() => {
+    if (attrs.title) {
+      document.title = attrs.title as string;
+    }
+  });
+
+  onUpdated(() => {
+    if (attrs.title) {
+      document.title = attrs.title as string;
+    }
   });
 
   defineOptions({
