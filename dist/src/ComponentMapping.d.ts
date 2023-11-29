@@ -9,7 +9,7 @@ export interface MappedComponentProperties extends ReloadForceAble {
     cqHierarchyType?: string;
     cqPath: string;
     cqType?: string;
-    isInEditor: boolean;
+    isInEditor?: boolean;
 }
 export interface EditConfig<P extends MappedComponentProperties> {
     emptyLabel?: string;
