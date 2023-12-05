@@ -11,10 +11,10 @@
     inject,
     onMounted,
     onUnmounted,
+    onUpdated,
     reactive,
     useAttrs,
     useSlots,
-    watch,
   } from 'vue';
   import Utils from '@/utils/Utils';
 
@@ -41,11 +41,10 @@
     },
   });
 
-  const attrs = useAttrs();
   const slots = useSlots();
   const isInEditor = inject('isInEditor', AuthoringUtils.isInEditor());
 
-  const modelProperties = reactive(attrs);
+  const modelProperties = reactive(useAttrs());
   const updatedCqPath = computed(() => {
     const { pagePath, itemPath, injectPropsOnInit, cqPath } = props;
     return Utils.getCQPath({
@@ -101,27 +100,19 @@
     ModelManager.removeListener(props.cqPath!, updateDataListener);
   });
 
+  onUpdated(() => {
+    console.log(`${updatedCqPath.value} has been updated`);
+  });
+
   defineOptions({
     inheritAttrs: false,
   });
-
-  watch(
-    attrs,
-    async (current, previous) => {
-      if (JSON.stringify(current) !== JSON.stringify(previous)) {
-        console.log('Attributes: ', current);
-      }
-    },
-    { deep: true },
-  );
 </script>
 
 <template>
   <component
     :is="slots.default?.()[0] as Component"
     v-bind="{
-      pagePath: pagePath,
-      itemPath: itemPath,
       cqPath: updatedCqPath,
       ...modelProperties,
     }"
