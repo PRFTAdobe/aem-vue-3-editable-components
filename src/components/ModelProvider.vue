@@ -12,6 +12,7 @@
     onMounted,
     onUnmounted,
     reactive,
+    useAttrs,
     useSlots,
   } from 'vue';
   import Utils from '@/utils/Utils';
@@ -42,6 +43,7 @@
   const slots = useSlots();
   const isInEditor = inject('isInEditor', AuthoringUtils.isInEditor());
 
+  const attributes = reactive(useAttrs());
   const modelProperties = reactive({});
   const updatedCqPath = computed(() => {
     const { pagePath, itemPath, injectPropsOnInit, cqPath } = props;
@@ -107,12 +109,11 @@
   <component
     :is="slots.default?.()[0] as Component"
     v-bind="{
-      ...$attrs,
       pagePath: pagePath,
       itemPath: itemPath,
       cqPath: updatedCqPath,
+      ...attributes,
       ...modelProperties,
     }"
-    :key="$attrs"
   />
 </template>
