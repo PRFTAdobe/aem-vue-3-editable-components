@@ -7,6 +7,7 @@
   } from '@adobe/aem-spa-page-model-manager';
   import {
     Component,
+    computed,
     inject,
     onMounted,
     onUnmounted,
@@ -42,8 +43,8 @@
   const slots = useSlots();
   const isInEditor = inject('isInEditor', AuthoringUtils.isInEditor());
 
-  const modelProperties = reactive(useAttrs());
-  const updatedCqPath = () => {
+  const modelProperties = reactive({});
+  const updatedCqPath = computed(() => {
     const { pagePath, itemPath, injectPropsOnInit, cqPath } = props;
     return Utils.getCQPath({
       pagePath,
@@ -51,7 +52,7 @@
       injectPropsOnInit,
       cqPath,
     });
-  };
+  });
 
   const updateData = (cqPath: string) => {
     const { pagePath, itemPath, injectPropsOnInit } = props;
@@ -83,10 +84,10 @@
     }
   };
 
-  const updateDataListener = updateData.bind(null, updatedCqPath());
+  const updateDataListener = updateData.bind(null, updatedCqPath.value);
 
   onMounted(() => {
-    const cqPath = updatedCqPath();
+    const cqPath = updatedCqPath.value;
 
     if (props.injectPropsOnInit) {
       updateData(cqPath);
@@ -107,7 +108,10 @@
   <component
     :is="slots.default?.()[0] as Component"
     v-bind="{
-      cqPath: updatedCqPath(),
+      ...useAttrs(),
+      pagePath: pagePath,
+      itemPath: itemPath,
+      cqPath: updatedCqPath,
       ...modelProperties,
     }"
   />
