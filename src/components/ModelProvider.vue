@@ -107,6 +107,7 @@
 
   onUpdated(() => {
     console.log(`${updatedCqPath.value} has been updated`);
+    console.log(useAttrs());
   });
 
   defineOptions({
