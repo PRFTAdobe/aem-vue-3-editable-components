@@ -12,7 +12,6 @@
     onMounted,
     onUnmounted,
     reactive,
-    useAttrs,
     useSlots,
   } from 'vue';
   import Utils from '@/utils/Utils';
@@ -108,7 +107,7 @@
   <component
     :is="slots.default?.()[0] as Component"
     v-bind="{
-      ...reactive(useAttrs()),
+      ...$attrs,
       pagePath: pagePath,
       itemPath: itemPath,
       cqPath: updatedCqPath,
