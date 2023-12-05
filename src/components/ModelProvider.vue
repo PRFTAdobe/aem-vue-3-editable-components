@@ -14,6 +14,7 @@
     reactive,
     useAttrs,
     useSlots,
+    watch,
   } from 'vue';
   import Utils from '@/utils/Utils';
 
@@ -40,11 +41,11 @@
     },
   });
 
+  const attrs = useAttrs();
   const slots = useSlots();
   const isInEditor = inject('isInEditor', AuthoringUtils.isInEditor());
 
-  const attributes = reactive(useAttrs());
-  const modelProperties = reactive({});
+  const modelProperties = reactive(attrs);
   const updatedCqPath = computed(() => {
     const { pagePath, itemPath, injectPropsOnInit, cqPath } = props;
     return Utils.getCQPath({
@@ -103,6 +104,16 @@
   defineOptions({
     inheritAttrs: false,
   });
+
+  watch(
+    attrs,
+    async (current, previous) => {
+      if (JSON.stringify(current) !== JSON.stringify(previous)) {
+        console.log('Attributes: ', current);
+      }
+    },
+    { deep: true },
+  );
 </script>
 
 <template>
@@ -112,7 +123,6 @@
       pagePath: pagePath,
       itemPath: itemPath,
       cqPath: updatedCqPath,
-      ...attributes,
       ...modelProperties,
     }"
   />
