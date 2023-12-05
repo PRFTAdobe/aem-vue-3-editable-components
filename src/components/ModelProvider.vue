@@ -117,6 +117,6 @@
 <template>
   <component
     :is="slots.default?.()[0] as Component"
-    v-bind="computedProperties"
+    v-model="computedProperties"
   />
 </template>
