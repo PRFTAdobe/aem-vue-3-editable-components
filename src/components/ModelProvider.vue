@@ -113,5 +113,6 @@
       cqPath: updatedCqPath,
       ...modelProperties,
     }"
+    :key="$attrs"
   />
 </template>
