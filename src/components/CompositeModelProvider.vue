@@ -27,6 +27,7 @@
   <ModelProvider
     :cq-force-reload="cqForceReload as boolean"
     :inject-props-on-init="injectPropsOnInit"
+    :model-properties="{ ...attrs }"
     v-bind="{ ...attrs }"
   >
     <component :is="slots.default?.()[0] as Component" />

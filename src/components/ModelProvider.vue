@@ -10,8 +10,9 @@
     inject,
     onMounted,
     onUnmounted,
+    onUpdated,
+    PropType,
     reactive,
-    useAttrs,
     useSlots,
   } from 'vue';
   import Utils from '@/utils/Utils';
@@ -32,6 +33,10 @@
     // eslint-disable-next-line vue/require-default-prop
     itemPath: {
       type: String,
+    },
+    modelProperties: {
+      type: Object as PropType<{ [key: string]: unknown }>,
+      default: () => ({}),
     },
     // eslint-disable-next-line vue/require-default-prop
     pagePath: {
@@ -98,6 +103,11 @@
     ModelManager.removeListener(props.cqPath!, updateDataListener);
   });
 
+  onUpdated(() => {
+    console.log(props.modelProperties);
+    console.log(updatedModelProperties);
+  });
+
   defineOptions({
     inheritAttrs: false,
   });
@@ -106,8 +116,9 @@
 <template>
   <component
     :is="slots.default?.()[0] as Component"
+    :key="props.modelProperties"
     v-bind="{
-      ...useAttrs(),
+      ...props.modelProperties,
       ...updatedModelProperties,
       cqPath: updatedCqPath(),
     }"
