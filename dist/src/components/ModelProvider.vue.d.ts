@@ -1,4 +1,3 @@
-import { PropType } from 'vue';
 declare const _default: import("vue").DefineComponent<{
     cqPath: {
         type: StringConstructor;
@@ -13,12 +12,6 @@ declare const _default: import("vue").DefineComponent<{
     };
     itemPath: {
         type: StringConstructor;
-    };
-    modelProperties: {
-        type: PropType<{
-            [key: string]: unknown;
-        }>;
-        default: () => {};
     };
     pagePath: {
         type: StringConstructor;
@@ -38,20 +31,11 @@ declare const _default: import("vue").DefineComponent<{
     itemPath: {
         type: StringConstructor;
     };
-    modelProperties: {
-        type: PropType<{
-            [key: string]: unknown;
-        }>;
-        default: () => {};
-    };
     pagePath: {
         type: StringConstructor;
     };
 }>>, {
     cqForceReload: boolean;
     injectPropsOnInit: boolean;
-    modelProperties: {
-        [key: string]: unknown;
-    };
 }, {}>;
 export default _default;

@@ -10,7 +10,8 @@
     inject,
     onMounted,
     onUnmounted,
-    PropType,
+    reactive,
+    useAttrs,
     useSlots,
   } from 'vue';
   import Utils from '@/utils/Utils';
@@ -32,10 +33,6 @@
     itemPath: {
       type: String,
     },
-    modelProperties: {
-      type: Object as PropType<{ [key: string]: unknown }>,
-      default: () => ({}),
-    },
     // eslint-disable-next-line vue/require-default-prop
     pagePath: {
       type: String,
@@ -44,6 +41,7 @@
 
   const slots = useSlots();
   const isInEditor = inject('isInEditor', AuthoringUtils.isInEditor());
+  const updatedModelProperties = reactive({});
 
   const updatedCqPath = () => {
     const { pagePath, itemPath, injectPropsOnInit, cqPath } = props;
@@ -69,7 +67,7 @@
       })
         .then((data: Model) => {
           if (data && Object.keys(data).length > 0) {
-            Object.assign(props.modelProperties, Utils.modelToProps(data));
+            Object.assign(updatedModelProperties, Utils.modelToProps(data));
             // Fire event once component model has been fetched and rendered to enable editing on AEM
             if (injectPropsOnInit && isInEditor) {
               PathUtils.dispatchGlobalCustomEvent(
@@ -108,6 +106,10 @@
 <template>
   <component
     :is="slots.default?.()[0] as Component"
-    v-bind="{ ...modelProperties, cqPath: updatedCqPath() }"
+    v-bind="{
+      ...useAttrs(),
+      ...updatedModelProperties,
+      cqPath: updatedCqPath(),
+    }"
   />
 </template>
