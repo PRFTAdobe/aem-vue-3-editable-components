@@ -10,10 +10,10 @@
     inject,
     onMounted,
     onUnmounted,
-    onUpdated,
     PropType,
     reactive,
     useSlots,
+    watch,
   } from 'vue';
   import Utils from '@/utils/Utils';
 
@@ -46,7 +46,7 @@
 
   const slots = useSlots();
   const isInEditor = inject('isInEditor', AuthoringUtils.isInEditor());
-  const updatedModelProperties = reactive({});
+  const updatedModelProperties = reactive(props.modelProperties);
 
   const updatedCqPath = () => {
     const { pagePath, itemPath, injectPropsOnInit, cqPath } = props;
@@ -103,10 +103,14 @@
     ModelManager.removeListener(props.cqPath!, updateDataListener);
   });
 
-  onUpdated(() => {
-    console.log(props.modelProperties);
-    console.log(updatedModelProperties);
-  });
+  watch(
+    () => props.modelProperties,
+    async (current, previous) => {
+      if (current !== previous) {
+        Object.assign(updatedModelProperties, props.modelProperties);
+      }
+    },
+  );
 
   defineOptions({
     inheritAttrs: false,
@@ -118,7 +122,6 @@
     :is="slots.default?.()[0] as Component"
     :key="props.modelProperties"
     v-bind="{
-      ...props.modelProperties,
       ...updatedModelProperties,
       cqPath: updatedCqPath(),
     }"
