@@ -1,4 +1,4 @@
-import { h as N, defineComponent as y, inject as q, useSlots as $, useAttrs as S, computed as C, unref as h, openBlock as f, createBlock as P, resolveDynamicComponent as v, normalizeProps as I, mergeProps as w, createElementBlock as _, guardReactiveProps as k, createCommentVNode as z, withCtx as U, reactive as W, onMounted as G, onUnmounted as H, watch as V, toRefs as J, provide as R, normalizeClass as Q, createElementVNode as X, Fragment as L, renderList as D, onUpdated as Y } from "vue";
+import { h as w, defineComponent as y, inject as q, useSlots as $, useAttrs as S, computed as C, unref as h, openBlock as f, createBlock as P, resolveDynamicComponent as v, normalizeProps as I, mergeProps as N, createElementBlock as _, guardReactiveProps as k, createCommentVNode as z, withCtx as U, reactive as W, onMounted as G, onUnmounted as H, watch as J, toRefs as V, provide as R, normalizeClass as Q, createElementVNode as X, Fragment as L, renderList as D, onUpdated as Y } from "vue";
 import { ComponentMapping as b } from "@adobe/aem-spa-component-mapping";
 import { ComponentMapping as Ae } from "@adobe/aem-spa-component-mapping";
 import { AuthoringUtils as A, ModelManager as F, PathUtils as Z } from "@adobe/aem-spa-page-model-manager";
@@ -78,7 +78,7 @@ const te = /* @__PURE__ */ K(ee), x = {
   },
   connectComponentWithItem(t, e, n, r, o, i) {
     const p = this.getItemPath(n, r, i);
-    return N(t, {
+    return w(t, {
       ...e,
       cqPath: p,
       containerProps: o(n)
@@ -114,7 +114,7 @@ const te = /* @__PURE__ */ K(ee), x = {
       if (o && typeof o.cqType < "u") {
         const i = e.get(o.cqType);
         i && n.push(
-          N(i, { ...o, cqPath: o.cqPath })
+          w(i, { ...o, cqPath: o.cqPath })
         );
       }
     }), n;
@@ -171,12 +171,12 @@ const te = /* @__PURE__ */ K(ee), x = {
     } : null);
     return (s, u) => {
       var d, l, m, c;
-      return !h(n) && e.componentProperties.hasOwnProperty("aemNoDecoration") && e.componentProperties.aemNoDecoration || e.componentProperties.hasOwnProperty("cqHierarchyType") && e.componentProperties.cqHierarchyType === "page" ? (f(), P(v((l = (d = h(r)).default) == null ? void 0 : l.call(d)[0]), I(w({ key: 0 }, { ...h(o), containerProps: e.containerProps })), null, 16)) : (f(), _("div", I(w({ key: 1 }, { ...i.value, ...p.value })), [
+      return !h(n) && e.componentProperties.hasOwnProperty("aemNoDecoration") && e.componentProperties.aemNoDecoration || e.componentProperties.hasOwnProperty("cqHierarchyType") && e.componentProperties.cqHierarchyType === "page" ? (f(), P(v((l = (d = h(r)).default) == null ? void 0 : l.call(d)[0]), I(N({ key: 0 }, { ...h(o), containerProps: e.containerProps })), null, 16)) : (f(), _("div", I(N({ key: 1 }, { ...i.value, ...p.value })), [
         (f(), P(v((c = (m = h(r)).default) == null ? void 0 : c.call(m)[0]), I(k({
           ...h(o),
           componentProperties: e.componentProperties
         })), null, 16)),
-        a.value ? (f(), _("div", I(w({ key: 0 }, a.value)), null, 16)) : z("", !0)
+        a.value ? (f(), _("div", I(N({ key: 0 }, a.value)), null, 16)) : z("", !0)
       ], 16));
     };
   }
@@ -264,14 +264,14 @@ const te = /* @__PURE__ */ K(ee), x = {
       e.injectPropsOnInit && p(s), F.addListener(s, a);
     }), H(() => {
       F.removeListener(e.cqPath, a);
-    }), V(
+    }), J(
       () => e.modelProperties,
       async (s, u) => {
-        s !== u && Object.assign(o, e.modelProperties);
+        JSON.stringify(s) !== JSON.stringify(u) && Object.assign(o, e.modelProperties);
       }
     ), (s, u) => {
       var d, l;
-      return f(), P(v((l = (d = h(n)).default) == null ? void 0 : l.call(d)[0]), w({
+      return f(), P(v((l = (d = h(n)).default) == null ? void 0 : l.call(d)[0]), N({
         key: e.modelProperties
       }, {
         ...o,
@@ -289,8 +289,8 @@ const te = /* @__PURE__ */ K(ee), x = {
     }
   },
   setup(t) {
-    const e = t, n = $(), r = S(), { modelConfig: o } = J(e), i = r.cqForceReload || o.value.forceReload, { injectPropsOnInit: p } = o.value;
-    return (a, s) => (f(), P(re, w({
+    const e = t, n = $(), r = S(), { modelConfig: o } = V(e), i = r.cqForceReload || o.value.forceReload, { injectPropsOnInit: p } = o.value;
+    return (a, s) => (f(), P(re, N({
       "cq-force-reload": h(i),
       "inject-props-on-init": h(p),
       "model-properties": { ...h(r) }
@@ -314,7 +314,7 @@ const te = /* @__PURE__ */ K(ee), x = {
       return f(), P(v((s = (a = h(e)).default) == null ? void 0 : s.call(a)[0]), I(k({ ...h(n) })), null, 16);
     };
   }
-}), ie = (t) => N(ae, {}, () => [N(t)]), ce = (t, e) => N(se, { modelConfig: e }, () => [N(t)]), pe = (t, e) => N(ne, { editConfig: e }, () => [N(t)]), le = (t, e, n) => {
+}), ie = (t) => w(ae, {}, () => [w(t)]), ce = (t, e) => w(se, { modelConfig: e }, () => [w(t)]), pe = (t, e) => w(ne, { editConfig: e }, () => [w(t)]), le = (t, e, n) => {
   const {
     injectPropsOnInit: r = !0,
     forceReload: o = !1,
@@ -527,7 +527,7 @@ const be = (t) => (e, n, r = {}) => (
       (f(!0), _(L, null, D(p.value, (d) => (f(), P(v(d), {
         key: d.toString()
       }))), 128)),
-      h(n) ? (f(), P(ye, I(w({ key: 0 }, a.value)), null, 16)) : z("", !0)
+      h(n) ? (f(), P(ye, I(N({ key: 0 }, a.value)), null, 16)) : z("", !0)
     ], 16));
   }
 }), _e = /* @__PURE__ */ y({
@@ -594,7 +594,7 @@ const be = (t) => (e, n, r = {}) => (
         "empty-label": e._allowedComponentPlaceholderListEmptyLabel,
         "placeholder-props": r.value,
         title: e.title
-      }, null, 8, ["components", "cq-path", "empty-label", "placeholder-props", "title"])) : (f(), P(Ce, w({
+      }, null, 8, ["components", "cq-path", "empty-label", "placeholder-props", "title"])) : (f(), P(Ce, N({
         key: 1,
         "aem-no-decoration": e.aemNoDecoration,
         "cq-items": e.cqItems,
@@ -669,7 +669,7 @@ const be = (t) => (e, n, r = {}) => (
       }))), 128))
     ], 16));
   }
-}), we = /* @__PURE__ */ y({
+}), Ne = /* @__PURE__ */ y({
   inheritAttrs: !1,
   __name: "ResponsiveGrid",
   props: {
@@ -715,7 +715,7 @@ const be = (t) => (e, n, r = {}) => (
       const s = {};
       return e.columnClassNames && e.columnClassNames[a] && (s.class = e.columnClassNames[a]), s;
     };
-    return (a, s) => (f(), P(_e, w({
+    return (a, s) => (f(), P(_e, N({
       "aem-no-decoration": e.aemNoDecoration,
       "cq-path": e.cqPath,
       "get-container-props": o,
@@ -740,7 +740,7 @@ export {
   be as MapTo,
   re as ModelProvider,
   je as Page,
-  we as ResponsiveGrid,
+  Ne as ResponsiveGrid,
   x as Utils,
   Ee as componentClassNames,
   Oe as componentProperties,

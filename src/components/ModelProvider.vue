@@ -106,7 +106,7 @@
   watch(
     () => props.modelProperties,
     async (current, previous) => {
-      if (current !== previous) {
+      if (JSON.stringify(current) !== JSON.stringify(previous)) {
         Object.assign(updatedModelProperties, props.modelProperties);
       }
     },
