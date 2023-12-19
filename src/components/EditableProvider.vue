@@ -35,11 +35,13 @@
     const editProperties: { [key: string]: string } = {};
     const { componentProperties } = props;
 
+    const { cqPath } = componentProperties;
+
     if (!isInEditor) {
       return editProperties;
     }
 
-    editProperties['data-cq-data-path'] = componentProperties.cqPath;
+    editProperties['data-cq-data-path'] = cqPath;
 
     if (props.editConfig.resourceType) {
       editProperties['data-cq-resource-type'] = props.editConfig.resourceType;
