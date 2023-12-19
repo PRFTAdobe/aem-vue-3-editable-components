@@ -50,10 +50,12 @@
     },
   });
 
+  const injectedIsInEditor = inject('isInEditor', AuthoringUtils.isInEditor());
+
   const computedIsInEditor =
     typeof props.isInEditor !== 'undefined'
       ? props.isInEditor
-      : inject('isInEditor', AuthoringUtils.isInEditor());
+      : injectedIsInEditor;
   const componentMapping = inject('componentMapping', new ComponentMapping());
 
   const containerProps = computed(() => {
@@ -111,6 +113,6 @@
       v-for="childComponent of childComponents"
       :key="childComponent.toString()"
     />
-    <ContainerPlaceholder v-if="computedIsInEditor" v-bind="placeholderProps" />
+    <ContainerPlaceholder v-if="injectedIsInEditor" v-bind="placeholderProps" />
   </div>
 </template>
