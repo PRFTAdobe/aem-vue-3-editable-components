@@ -7,6 +7,7 @@
   } from '@adobe/aem-spa-page-model-manager';
   import {
     Component,
+    computed,
     inject,
     onMounted,
     onUnmounted,
@@ -15,7 +16,6 @@
     useSlots,
   } from 'vue';
   import Utils from '@/utils/Utils';
-  import { MappedComponentProperties } from '@/ComponentMapping';
 
   const props = defineProps({
     // eslint-disable-next-line vue/require-default-prop
@@ -41,11 +41,10 @@
   });
 
   const slots = useSlots();
-  const attrs = useAttrs();
   const isInEditor = inject('isInEditor', AuthoringUtils.isInEditor());
-  const modelProperties = ref(attrs as unknown as MappedComponentProperties);
 
-  const updatedCqPath = () => {
+  const modelProperties = ref(useAttrs());
+  const updatedCqPath = computed(() => {
     const { pagePath, itemPath, injectPropsOnInit, cqPath } = props;
     return Utils.getCQPath({
       pagePath,
@@ -53,7 +52,7 @@
       injectPropsOnInit,
       cqPath,
     });
-  };
+  });
 
   const updateData = (cqPath: string) => {
     const { pagePath, itemPath, injectPropsOnInit } = props;
@@ -70,9 +69,8 @@
         .then((data: Model) => {
           if (data && Object.keys(data).length > 0) {
             modelProperties.value = {
-              ...modelProperties.value,
+              ...modelProperties,
               ...Utils.modelToProps(data),
-              cqPath: updatedCqPath(),
             };
             // Fire event once component model has been fetched and rendered to enable editing on AEM
             if (injectPropsOnInit && isInEditor) {
@@ -89,10 +87,10 @@
     }
   };
 
-  const updateDataListener = updateData.bind(null, updatedCqPath());
+  const updateDataListener = updateData.bind(null, updatedCqPath.value);
 
   onMounted(() => {
-    const cqPath = updatedCqPath();
+    const cqPath = updatedCqPath.value;
 
     if (props.injectPropsOnInit) {
       updateData(cqPath);
@@ -110,5 +108,11 @@
 </script>
 
 <template>
-  <component :is="slots.default?.()[0] as Component" v-bind="modelProperties" />
+  <component
+    :is="slots.default?.()[0] as Component"
+    v-bind="{
+      cqPath: updatedCqPath,
+      ...modelProperties,
+    }"
+  />
 </template>
