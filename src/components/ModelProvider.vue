@@ -12,8 +12,8 @@
     onUnmounted,
     PropType,
     reactive,
+    useAttrs,
     useSlots,
-    watch,
   } from 'vue';
   import Utils from '@/utils/Utils';
 
@@ -30,10 +30,6 @@
       type: Boolean,
       default: false,
     },
-    // eslint-disable-next-line vue/require-default-prop
-    itemPath: {
-      type: String,
-    },
     modelProperties: {
       type: Object as PropType<{ [key: string]: unknown }>,
       default: () => ({}),
@@ -42,12 +38,16 @@
     pagePath: {
       type: String,
     },
+    // eslint-disable-next-line vue/require-default-prop
+    itemPath: {
+      type: String,
+    },
   });
 
   const slots = useSlots();
   const isInEditor = inject('isInEditor', AuthoringUtils.isInEditor());
-  const updatedModelProperties = reactive(props.modelProperties);
 
+  const modelProperties = reactive(useAttrs());
   const updatedCqPath = () => {
     const { pagePath, itemPath, injectPropsOnInit, cqPath } = props;
     return Utils.getCQPath({
@@ -72,7 +72,7 @@
       })
         .then((data: Model) => {
           if (data && Object.keys(data).length > 0) {
-            Object.assign(updatedModelProperties, Utils.modelToProps(data));
+            Object.assign(modelProperties, Utils.modelToProps(data));
             // Fire event once component model has been fetched and rendered to enable editing on AEM
             if (injectPropsOnInit && isInEditor) {
               PathUtils.dispatchGlobalCustomEvent(
@@ -103,15 +103,6 @@
     ModelManager.removeListener(props.cqPath!, updateDataListener);
   });
 
-  watch(
-    () => props.modelProperties,
-    async (current, previous) => {
-      if (JSON.stringify(current) !== JSON.stringify(previous)) {
-        Object.assign(updatedModelProperties, props.modelProperties);
-      }
-    },
-  );
-
   defineOptions({
     inheritAttrs: false,
   });
@@ -120,10 +111,9 @@
 <template>
   <component
     :is="slots.default?.()[0] as Component"
-    :key="props.modelProperties"
     v-bind="{
-      ...updatedModelProperties,
       cqPath: updatedCqPath(),
+      ...modelProperties,
     }"
   />
 </template>

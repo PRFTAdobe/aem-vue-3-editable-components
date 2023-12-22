@@ -1,8 +1,8 @@
-import { h as w, defineComponent as y, inject as q, useSlots as $, useAttrs as S, computed as C, unref as h, openBlock as f, createBlock as P, resolveDynamicComponent as v, normalizeProps as I, mergeProps as N, createElementBlock as _, guardReactiveProps as k, createCommentVNode as z, withCtx as U, reactive as W, onMounted as G, onUnmounted as H, watch as J, toRefs as V, provide as R, normalizeClass as Q, createElementVNode as X, Fragment as L, renderList as D, onUpdated as Y } from "vue";
+import { h as N, defineComponent as y, inject as I, useSlots as L, useAttrs as w, computed as C, unref as h, openBlock as u, createBlock as P, resolveDynamicComponent as v, normalizeProps as q, mergeProps as S, createElementBlock as _, guardReactiveProps as $, createCommentVNode as z, withCtx as U, reactive as W, onMounted as G, onUnmounted as H, toRefs as V, provide as R, normalizeClass as Q, createElementVNode as J, Fragment as k, renderList as D, onUpdated as X } from "vue";
 import { ComponentMapping as b } from "@adobe/aem-spa-component-mapping";
-import { ComponentMapping as Ae } from "@adobe/aem-spa-component-mapping";
-import { AuthoringUtils as A, ModelManager as F, PathUtils as Z } from "@adobe/aem-spa-page-model-manager";
-function K(t) {
+import { ComponentMapping as Se } from "@adobe/aem-spa-component-mapping";
+import { AuthoringUtils as A, ModelManager as F, PathUtils as Y } from "@adobe/aem-spa-page-model-manager";
+function Z(t) {
   return t && t.__esModule && Object.prototype.hasOwnProperty.call(t, "default") ? t.default : t;
 }
 var B = { exports: {} };
@@ -10,16 +10,16 @@ var B = { exports: {} };
   Object.defineProperty(e, "__esModule", {
     value: !0
   }), e.default = void 0;
-  function n(d) {
+  function o(d) {
     "@babel/helpers - typeof";
-    return n = typeof Symbol == "function" && typeof Symbol.iterator == "symbol" ? function(l) {
+    return o = typeof Symbol == "function" && typeof Symbol.iterator == "symbol" ? function(l) {
       return typeof l;
     } : function(l) {
       return l && typeof Symbol == "function" && l.constructor === Symbol && l !== Symbol.prototype ? "symbol" : typeof l;
-    }, n(d);
+    }, o(d);
   }
-  var r = 47, o = 46, i = function(l) {
-    var m = n(l);
+  var n = 47, r = 46, i = function(l) {
+    var m = o(l);
     if (m !== "string")
       throw new TypeError("Expected a string, got a ".concat(m));
   }, p = function(l, m) {
@@ -27,14 +27,14 @@ var B = { exports: {} };
       if (g < l.length)
         M = l.charCodeAt(g);
       else {
-        if (M === r)
+        if (M === n)
           break;
-        M = r;
+        M = n;
       }
-      if (M === r) {
+      if (M === n) {
         if (!(O === g - 1 || j === 1))
           if (O !== g - 1 && j === 2) {
-            if (c.length < 2 || E !== 2 || c.charCodeAt(c.length - 1) !== o || c.charCodeAt(c.length - 2) !== o) {
+            if (c.length < 2 || E !== 2 || c.charCodeAt(c.length - 1) !== r || c.charCodeAt(c.length - 2) !== r) {
               if (c.length > 2) {
                 var T = c.lastIndexOf("/");
                 if (T !== c.length - 1) {
@@ -51,94 +51,94 @@ var B = { exports: {} };
             c.length > 0 ? c += "/" + l.slice(O + 1, g) : c = l.slice(O + 1, g), E = g - O - 1;
         O = g, j = 0;
       } else
-        M === o && j !== -1 ? ++j : j = -1;
+        M === r && j !== -1 ? ++j : j = -1;
     }
     return c;
-  }, a = function(l) {
+  }, s = function(l) {
     try {
       return decodeURIComponent(l);
     } catch {
       return l;
     }
-  }, s = function(l) {
+  }, a = function(l) {
     i(l);
     var m = l;
     if (m.length === 0)
       return ".";
-    var c = m.charCodeAt(0) === r, E = m.charCodeAt(m.length - 1) === r;
-    return m = a(m), m = p(m, !c), m.length === 0 && !c && (m = "."), m.length > 0 && E && (m += "/"), c ? "/" + m : m;
-  }, u = s;
-  e.default = u, t.exports = e.default;
+    var c = m.charCodeAt(0) === n, E = m.charCodeAt(m.length - 1) === n;
+    return m = s(m), m = p(m, !c), m.length === 0 && !c && (m = "."), m.length > 0 && E && (m += "/"), c ? "/" + m : m;
+  }, f = a;
+  e.default = f, t.exports = e.default;
 })(B, B.exports);
-var ee = B.exports;
-const te = /* @__PURE__ */ K(ee), x = {
-  getItemPath(t, e, n) {
-    let r = (e == null ? void 0 : e.length) > 0 ? `${e}/${t}` : t;
-    return n && (r = (e == null ? void 0 : e.length) > 0 ? `${e}/jcr:content/${t}` : t), r;
+var K = B.exports;
+const ee = /* @__PURE__ */ Z(K), x = {
+  getItemPath(t, e, o) {
+    let n = (e == null ? void 0 : e.length) > 0 ? `${e}/${t}` : t;
+    return o && (n = (e == null ? void 0 : e.length) > 0 ? `${e}/jcr:content/${t}` : t), n;
   },
-  connectComponentWithItem(t, e, n, r, o, i) {
-    const p = this.getItemPath(n, r, i);
-    return w(t, {
+  connectComponentWithItem(t, e, o, n, r, i) {
+    const p = this.getItemPath(o, n, i);
+    return N(t, {
       ...e,
       cqPath: p,
-      containerProps: o(n)
+      containerProps: r(o)
     });
   },
-  getChildComponents(t, e, n, r, o, i, p) {
-    const a = [];
-    return Object.keys(e).length > 0 && n.length > 0 && n.forEach((s) => {
-      const u = this.modelToProps(
-        e[s]
+  getChildComponents(t, e, o, n, r, i, p) {
+    const s = [];
+    return Object.keys(e).length > 0 && o.length > 0 && o.forEach((a) => {
+      const f = this.modelToProps(
+        e[a]
       );
-      if (u && typeof u.cqType < "u") {
-        const d = p.get(u.cqType);
-        r && (u.aemNoDecoration = r), d && a.push(
+      if (f && typeof f.cqType < "u") {
+        const d = p.get(f.cqType);
+        n && (f.aemNoDecoration = n), d && s.push(
           this.connectComponentWithItem(
             d,
-            u,
-            s,
+            f,
+            a,
             t,
-            o,
+            r,
             i
           )
         );
       }
-    }), a;
+    }), s;
   },
   getChildPages(t, e) {
-    const n = [];
-    return Object.keys(t).length === 0 || Object.keys(t).forEach((r) => {
-      const o = this.modelToProps(
-        t[r]
+    const o = [];
+    return Object.keys(t).length === 0 || Object.keys(t).forEach((n) => {
+      const r = this.modelToProps(
+        t[n]
       );
-      if (o && typeof o.cqType < "u") {
-        const i = e.get(o.cqType);
-        i && n.push(
-          w(i, { ...o, cqPath: o.cqPath })
+      if (r && typeof r.cqType < "u") {
+        const i = e.get(r.cqType);
+        i && o.push(
+          N(i, { ...r, cqPath: r.cqPath })
         );
       }
-    }), n;
+    }), o;
   },
   getCQPath(t) {
-    const { pagePath: e = "", itemPath: n = "", injectPropsOnInit: r } = t;
-    let { cqPath: o = "" } = t;
-    return r && !o && (o = te(
-      n ? `${e}/jcr:content/${n}` : e
-    ), o = o.replace(/^\.$/, "")), o;
+    const { pagePath: e = "", itemPath: o = "", injectPropsOnInit: n } = t;
+    let { cqPath: r = "" } = t;
+    return n && !r && (r = ee(
+      o ? `${e}/jcr:content/${o}` : e
+    ), r = r.replace(/^\.$/, "")), r;
   },
   modelToProps(t) {
-    const e = Object.getOwnPropertyNames(t), n = {}, r = (o) => {
-      const i = o.substring(1);
+    const e = Object.getOwnPropertyNames(t), o = {}, n = (r) => {
+      const i = r.substring(1);
       return `cq${i.substring(0, 1).toUpperCase()}${i.substring(
         1
       )}`;
     };
-    return e.forEach((o) => {
-      let i = o;
-      i.startsWith(":") && (i = r(i)), n[i] = t[o];
-    }), n;
+    return e.forEach((r) => {
+      let i = r;
+      i.startsWith(":") && (i = n(i)), o[i] = t[r];
+    }), o;
   }
-}, oe = /* @__PURE__ */ y({
+}, te = /* @__PURE__ */ y({
   inheritAttrs: !1,
   __name: "EditableProvider",
   props: {
@@ -158,29 +158,29 @@ const te = /* @__PURE__ */ K(ee), x = {
     }
   },
   setup(t) {
-    const e = t, n = q("isInEditor", A.isInEditor()), r = $(), o = S(), i = C(() => {
-      const s = {}, { componentProperties: u } = e, { cqPath: d } = u;
-      return n && (s["data-cq-data-path"] = d, e.editConfig.resourceType && (s["data-cq-resource-type"] = e.editConfig.resourceType)), s;
+    const e = t, o = I("isInEditor", A.isInEditor()), n = L(), r = w(), i = C(() => {
+      const a = {}, { componentProperties: f } = e, { cqPath: d } = f;
+      return o && (a["data-cq-data-path"] = d, e.editConfig.resourceType && (a["data-cq-resource-type"] = e.editConfig.resourceType)), a;
     }), p = C(() => {
       var c;
-      const s = {}, { componentProperties: u } = e, { appliedCssClassNames: d, cqType: l } = u, m = [];
-      return d && m.push(d), (c = e == null ? void 0 : e.containerProps) != null && c.class && m.push(e.containerProps.class), l && (l != null && l.endsWith("/container")) && m.push("aem-editable"), m.length && (s.class = m.join(" ")), s;
-    }), a = C(() => n && typeof e.editConfig.isEmpty == "function" && e.editConfig.isEmpty(e.componentProperties) ? {
+      const a = {}, { componentProperties: f } = e, { appliedCssClassNames: d, cqType: l } = f, m = [];
+      return d && m.push(d), (c = e == null ? void 0 : e.containerProps) != null && c.class && m.push(e.containerProps.class), l && (l != null && l.endsWith("/container")) && m.push("aem-editable"), m.length && (a.class = m.join(" ")), a;
+    }), s = C(() => o && typeof e.editConfig.isEmpty == "function" && e.editConfig.isEmpty(e.componentProperties) ? {
       class: "cq-placeholder",
       "data-emptytext": e.editConfig.emptyLabel
     } : null);
-    return (s, u) => {
+    return (a, f) => {
       var d, l, m, c;
-      return !h(n) && e.componentProperties.hasOwnProperty("aemNoDecoration") && e.componentProperties.aemNoDecoration || e.componentProperties.hasOwnProperty("cqHierarchyType") && e.componentProperties.cqHierarchyType === "page" ? (f(), P(v((l = (d = h(r)).default) == null ? void 0 : l.call(d)[0]), I(N({ key: 0 }, { ...h(o), containerProps: e.containerProps })), null, 16)) : (f(), _("div", I(N({ key: 1 }, { ...i.value, ...p.value })), [
-        (f(), P(v((c = (m = h(r)).default) == null ? void 0 : c.call(m)[0]), I(k({
-          ...h(o),
+      return !h(o) && e.componentProperties.hasOwnProperty("aemNoDecoration") && e.componentProperties.aemNoDecoration || e.componentProperties.hasOwnProperty("cqHierarchyType") && e.componentProperties.cqHierarchyType === "page" ? (u(), P(v((l = (d = h(n)).default) == null ? void 0 : l.call(d)[0]), q(S({ key: 0 }, { ...h(r), containerProps: e.containerProps })), null, 16)) : (u(), _("div", q(S({ key: 1 }, { ...i.value, ...p.value })), [
+        (u(), P(v((c = (m = h(n)).default) == null ? void 0 : c.call(m)[0]), q($({
+          ...h(r),
           componentProperties: e.componentProperties
         })), null, 16)),
-        a.value ? (f(), _("div", I(N({ key: 0 }, a.value)), null, 16)) : z("", !0)
+        s.value ? (u(), _("div", q(S({ key: 0 }, s.value)), null, 16)) : z("", !0)
       ], 16));
     };
   }
-}), ne = /* @__PURE__ */ y({
+}), oe = /* @__PURE__ */ y({
   inheritAttrs: !1,
   __name: "CompositeEditableProvider",
   props: {
@@ -192,22 +192,22 @@ const te = /* @__PURE__ */ K(ee), x = {
     }
   },
   setup(t) {
-    const e = t, n = $(), r = S();
-    return (o, i) => (f(), P(oe, I(k({
-      ...h(r),
-      componentProperties: { ...h(r) },
+    const e = t, o = L(), n = w();
+    return (r, i) => (u(), P(te, q($({
+      ...h(n),
+      componentProperties: { ...h(n) },
       editConfig: e.editConfig
     })), {
       default: U(() => {
-        var p, a;
+        var p, s;
         return [
-          (f(), P(v((a = (p = h(n)).default) == null ? void 0 : a.call(p)[0])))
+          (u(), P(v((s = (p = h(o)).default) == null ? void 0 : s.call(p)[0])))
         ];
       }),
       _: 1
     }, 16));
   }
-}), re = /* @__PURE__ */ y({
+}), ne = /* @__PURE__ */ y({
   inheritAttrs: !1,
   __name: "ModelProvider",
   props: {
@@ -223,10 +223,6 @@ const te = /* @__PURE__ */ K(ee), x = {
       type: Boolean,
       default: !1
     },
-    // eslint-disable-next-line vue/require-default-prop
-    itemPath: {
-      type: String
-    },
     modelProperties: {
       type: Object,
       default: () => ({})
@@ -234,52 +230,49 @@ const te = /* @__PURE__ */ K(ee), x = {
     // eslint-disable-next-line vue/require-default-prop
     pagePath: {
       type: String
+    },
+    // eslint-disable-next-line vue/require-default-prop
+    itemPath: {
+      type: String
     }
   },
   setup(t) {
-    const e = t, n = $(), r = q("isInEditor", A.isInEditor()), o = W(e.modelProperties), i = () => {
-      const { pagePath: s, itemPath: u, injectPropsOnInit: d, cqPath: l } = e;
+    const e = t, o = L(), n = I("isInEditor", A.isInEditor()), r = W(w()), i = () => {
+      const { pagePath: a, itemPath: f, injectPropsOnInit: d, cqPath: l } = e;
       return x.getCQPath({
-        pagePath: s,
-        itemPath: u,
+        pagePath: a,
+        itemPath: f,
         injectPropsOnInit: d,
         cqPath: l
       });
-    }, p = (s) => {
-      const { pagePath: u, itemPath: d, injectPropsOnInit: l } = e, m = s || e.cqPath || u && x.getCQPath({ pagePath: u, itemPath: d, injectPropsOnInit: l });
+    }, p = (a) => {
+      const { pagePath: f, itemPath: d, injectPropsOnInit: l } = e, m = a || e.cqPath || f && x.getCQPath({ pagePath: f, itemPath: d, injectPropsOnInit: l });
       m && F.getData({
         path: m,
         forceReload: e.cqForceReload
       }).then((c) => {
-        c && Object.keys(c).length > 0 && (Object.assign(o, x.modelToProps(c)), l && r && Z.dispatchGlobalCustomEvent(
+        c && Object.keys(c).length > 0 && (Object.assign(r, x.modelToProps(c)), l && n && Y.dispatchGlobalCustomEvent(
           "cq-async-content-loaded",
           {}
         ));
       }).catch((c) => {
         console.error(c);
       });
-    }, a = p.bind(null, i());
+    }, s = p.bind(null, i());
     return G(() => {
-      const s = i();
-      e.injectPropsOnInit && p(s), F.addListener(s, a);
+      const a = i();
+      e.injectPropsOnInit && p(a), F.addListener(a, s);
     }), H(() => {
-      F.removeListener(e.cqPath, a);
-    }), J(
-      () => e.modelProperties,
-      async (s, u) => {
-        JSON.stringify(s) !== JSON.stringify(u) && Object.assign(o, e.modelProperties);
-      }
-    ), (s, u) => {
+      F.removeListener(e.cqPath, s);
+    }), (a, f) => {
       var d, l;
-      return f(), P(v((l = (d = h(n)).default) == null ? void 0 : l.call(d)[0]), N({
-        key: e.modelProperties
-      }, {
-        ...o,
-        cqPath: i()
-      }), null, 16);
+      return u(), P(v((l = (d = h(o)).default) == null ? void 0 : l.call(d)[0]), q($({
+        cqPath: i(),
+        ...r
+      })), null, 16);
     };
   }
-}), se = /* @__PURE__ */ y({
+}), re = /* @__PURE__ */ y({
   inheritAttrs: !1,
   __name: "CompositeModelProvider",
   props: {
@@ -289,65 +282,65 @@ const te = /* @__PURE__ */ K(ee), x = {
     }
   },
   setup(t) {
-    const e = t, n = $(), r = S(), { modelConfig: o } = V(e), i = r.cqForceReload || o.value.forceReload, { injectPropsOnInit: p } = o.value;
-    return (a, s) => (f(), P(re, N({
+    const e = t, o = L(), n = w(), { modelConfig: r } = V(e), i = n.cqForceReload || r.value.forceReload, { injectPropsOnInit: p } = r.value;
+    return (s, a) => (u(), P(ne, S({
       "cq-force-reload": h(i),
       "inject-props-on-init": h(p),
-      "model-properties": { ...h(r) }
-    }, { ...h(r) }), {
+      "model-properties": { ...h(n) }
+    }, { ...h(n) }), {
       default: U(() => {
-        var u, d;
+        var f, d;
         return [
-          (f(), P(v((d = (u = h(n)).default) == null ? void 0 : d.call(u)[0])))
+          (u(), P(v((d = (f = h(o)).default) == null ? void 0 : d.call(f)[0])))
         ];
       }),
       _: 1
     }, 16, ["cq-force-reload", "inject-props-on-init", "model-properties"]));
   }
-}), ae = /* @__PURE__ */ y({
+}), se = /* @__PURE__ */ y({
   inheritAttrs: !1,
   __name: "ContextProvider",
   setup(t) {
-    const e = $(), n = S(), r = q("componentMapping", new b()), o = q("isInEditor", A.isInEditor());
-    return R("isInEditor", o), R("componentMapping", r), (i, p) => {
-      var a, s;
-      return f(), P(v((s = (a = h(e)).default) == null ? void 0 : s.call(a)[0]), I(k({ ...h(n) })), null, 16);
+    const e = L(), o = w(), n = I("componentMapping", new b()), r = I("isInEditor", A.isInEditor());
+    return R("isInEditor", r), R("componentMapping", n), (i, p) => {
+      var s, a;
+      return u(), P(v((a = (s = h(e)).default) == null ? void 0 : a.call(s)[0]), q($({ ...h(o) })), null, 16);
     };
   }
-}), ie = (t) => w(ae, {}, () => [w(t)]), ce = (t, e) => w(se, { modelConfig: e }, () => [w(t)]), pe = (t, e) => w(ne, { editConfig: e }, () => [w(t)]), le = (t, e, n) => {
+}), ae = (t) => N(se, {}, () => [N(t)]), ie = (t, e) => N(re, { modelConfig: e }, () => [N(t)]), ce = (t, e) => N(oe, { editConfig: e }, () => [N(t)]), pe = (t, e, o) => {
   const {
-    injectPropsOnInit: r = !0,
-    forceReload: o = !1,
+    injectPropsOnInit: n = !0,
+    forceReload: r = !1,
     ...i
-  } = n || {}, p = {
-    injectPropsOnInit: r,
-    forceReload: o,
+  } = o || {}, p = {
+    injectPropsOnInit: n,
+    forceReload: r,
     ...i
   };
-  let a = t;
-  return a = ie(
-    ce(pe(a, e), p)
-  ), a;
-}, de = b.map, me = b.get;
-b.map = function(e, n, r = {
+  let s = t;
+  return s = ae(
+    ie(ce(s, e), p)
+  ), s;
+}, le = b.map, de = b.get;
+b.map = function(e, o, n = {
   isEmpty: () => !1
-}, o = {}) {
-  const { injectPropsOnInit: i = !1, ...p } = o || {}, a = le(n, r, {
+}, r = {}) {
+  const { injectPropsOnInit: i = !1, ...p } = r || {}, s = pe(o, n, {
     injectPropsOnInit: i,
     ...p
   });
-  return de.call(b, e, a), a;
+  return le.call(b, e, s), s;
 };
-b.get = me;
-const be = (t) => (e, n, r = {}) => (
+b.get = de;
+const ve = (t) => (e, o, n = {}) => (
   // @ts-ignore
-  b.map(t, e, n, r)
-), Ee = (t, e, n, r, o, i) => {
+  b.map(t, e, o, n)
+), be = (t, e, o, n, r, i) => {
   let p = [];
-  t && (p = [t]), e && p.push(e), n && p.push(...n.split(" "));
-  const a = r == null ? void 0 : r.class;
-  return i && a && !o && p.push(a), p;
-}, Oe = (t) => ({
+  t && (p = [t]), e && p.push(e), o && p.push(...o.split(" "));
+  const s = n == null ? void 0 : n.class;
+  return i && s && !r && p.push(s), p;
+}, Ee = (t) => ({
   aemNoDecoration: {
     type: Boolean,
     default: !1
@@ -371,7 +364,7 @@ const be = (t) => (e, n, r = {}) => (
   id: {
     type: String
   }
-}), ue = ["data-cq-data-path", "data-emptytext"], fe = /* @__PURE__ */ y({
+}), me = ["data-cq-data-path", "data-emptytext"], ue = /* @__PURE__ */ y({
   inheritAttrs: !1,
   __name: "AllowedComponentPlaceholder",
   props: {
@@ -386,13 +379,13 @@ const be = (t) => (e, n, r = {}) => (
   },
   setup(t) {
     const e = t;
-    return (n, r) => (f(), _("div", {
+    return (o, n) => (u(), _("div", {
       "data-cq-data-path": e.path,
       "data-emptytext": e.emptyLabel,
       class: "aem-AllowedComponent--component cq-placeholder placeholder"
-    }, null, 8, ue));
+    }, null, 8, me));
   }
-}), he = ["data-text"], Pe = /* @__PURE__ */ y({
+}), fe = ["data-text"], he = /* @__PURE__ */ y({
   inheritAttrs: !1,
   __name: "AllowedComponentPlaceholderList",
   props: {
@@ -418,22 +411,22 @@ const be = (t) => (e, n, r = {}) => (
     }
   },
   setup(t) {
-    const e = t, n = C(
+    const e = t, o = C(
       () => e.components && e.components.length > 0 ? e.title : e.emptyLabel
     );
-    return (r, o) => {
+    return (n, r) => {
       var i;
-      return f(), _("div", {
+      return u(), _("div", {
         class: Q([
           "aem-AllowedComponent--list",
           (i = e.placeholderProps) == null ? void 0 : i.placeholderClassNames
         ])
       }, [
-        X("div", {
-          "data-text": n.value,
+        J("div", {
+          "data-text": o.value,
           class: "aem-AllowedComponent--title"
-        }, null, 8, he),
-        (f(!0), _(L, null, D(e.components, (p) => (f(), P(fe, {
+        }, null, 8, fe),
+        (u(!0), _(k, null, D(e.components, (p) => (u(), P(ue, {
           key: p.path,
           "empty-label": p.title,
           path: p.path
@@ -441,7 +434,7 @@ const be = (t) => (e, n, r = {}) => (
       ], 2);
     };
   }
-}), ge = ["data-cq-data-path"], ye = /* @__PURE__ */ y({
+}), Pe = ["data-cq-data-path"], ge = /* @__PURE__ */ y({
   __name: "ContainerPlaceholder",
   props: {
     cqPath: {
@@ -455,12 +448,12 @@ const be = (t) => (e, n, r = {}) => (
   },
   setup(t) {
     const e = t;
-    return (n, r) => (f(), _("div", {
+    return (o, n) => (u(), _("div", {
       class: Q(e.placeholderClassNames),
       "data-cq-data-path": `${e.cqPath}/*`
-    }, null, 10, ge));
+    }, null, 10, Pe));
   }
-}), Ce = /* @__PURE__ */ y({
+}), ye = /* @__PURE__ */ y({
   // eslint-disable-next-line vue/multi-word-component-names
   name: "Container",
   inheritAttrs: !1,
@@ -504,11 +497,11 @@ const be = (t) => (e, n, r = {}) => (
     }
   },
   setup(t) {
-    const e = t, n = q("isInEditor", A.isInEditor()), r = typeof e.isInEditor < "u" ? e.isInEditor : n, o = q("componentMapping", new b()), i = C(() => {
-      let s = {};
-      return typeof e.getContainerProps == "function" ? s = e.getContainerProps() : (s = {
+    const e = t, o = I("isInEditor", A.isInEditor()), n = typeof e.isInEditor < "u" ? e.isInEditor : o, r = I("componentMapping", new b()), i = C(() => {
+      let a = {};
+      return typeof e.getContainerProps == "function" ? a = e.getContainerProps() : (a = {
         class: "aem-container"
-      }, r && (s["data-cq-data-path"] = e.cqPath)), s;
+      }, n && (a["data-cq-data-path"] = e.cqPath)), a;
     }), p = C(
       () => x.getChildComponents(
         e.cqPath,
@@ -517,20 +510,20 @@ const be = (t) => (e, n, r = {}) => (
         e.aemNoDecoration,
         typeof e.getItemComponentProps == "function" ? e.getItemComponentProps : () => ({}),
         !1,
-        o
+        r
       )
-    ), a = C(() => typeof e.getPlaceholderProps == "function" ? e.getPlaceholderProps() : {
+    ), s = C(() => typeof e.getPlaceholderProps == "function" ? e.getPlaceholderProps() : {
       cqPath: e.cqPath,
       placeholderClassNames: "new section"
     });
-    return (s, u) => (f(), _("div", I(k({ ...i.value })), [
-      (f(!0), _(L, null, D(p.value, (d) => (f(), P(v(d), {
+    return (a, f) => (u(), _("div", q($({ ...i.value })), [
+      (u(!0), _(k, null, D(p.value, (d) => (u(), P(v(d), {
         key: d.toString()
       }))), 128)),
-      h(n) ? (f(), P(ye, I(N({ key: 0 }, a.value)), null, 16)) : z("", !0)
+      h(o) ? (u(), P(ge, q(S({ key: 0 }, s.value)), null, 16)) : z("", !0)
     ], 16));
   }
-}), _e = /* @__PURE__ */ y({
+}), Ce = /* @__PURE__ */ y({
   inheritAttrs: !1,
   __name: "AllowedComponentsContainer",
   props: {
@@ -581,20 +574,20 @@ const be = (t) => (e, n, r = {}) => (
     }
   },
   setup(t) {
-    const e = t, n = typeof e.isInEditor < "u" ? e.isInEditor : q("isInEditor", A.isInEditor()), r = C(() => typeof e.getPlaceholderProps == "function" ? e.getPlaceholderProps() : {
+    const e = t, o = typeof e.isInEditor < "u" ? e.isInEditor : I("isInEditor", A.isInEditor()), n = C(() => typeof e.getPlaceholderProps == "function" ? e.getPlaceholderProps() : {
       cqPath: e.cqPath,
       placeholderClassNames: "new section"
-    }), o = S();
+    }), r = w();
     return (i, p) => {
-      var a;
-      return h(n) && e.allowedComponents && ((a = e.allowedComponents) != null && a.applicable) ? (f(), P(Pe, {
+      var s;
+      return h(o) && e.allowedComponents && ((s = e.allowedComponents) != null && s.applicable) ? (u(), P(he, {
         key: 0,
         components: e.allowedComponents.components,
         "cq-path": e.cqPath,
         "empty-label": e._allowedComponentPlaceholderListEmptyLabel,
-        "placeholder-props": r.value,
+        "placeholder-props": n.value,
         title: e.title
-      }, null, 8, ["components", "cq-path", "empty-label", "placeholder-props", "title"])) : (f(), P(Ce, N({
+      }, null, 8, ["components", "cq-path", "empty-label", "placeholder-props", "title"])) : (u(), P(ye, S({
         key: 1,
         "aem-no-decoration": e.aemNoDecoration,
         "cq-items": e.cqItems,
@@ -603,11 +596,11 @@ const be = (t) => (e, n, r = {}) => (
         "get-container-props": e.getContainerProps,
         "get-item-component-props": e.getItemComponentProps,
         "get-placeholder-props": e.getPlaceholderProps,
-        "is-in-editor": h(n)
-      }, { ...h(o) }), null, 16, ["aem-no-decoration", "cq-items", "cq-items-order", "cq-path", "get-container-props", "get-item-component-props", "get-placeholder-props", "is-in-editor"]));
+        "is-in-editor": h(o)
+      }, { ...h(r) }), null, 16, ["aem-no-decoration", "cq-items", "cq-items-order", "cq-path", "get-container-props", "get-item-component-props", "get-placeholder-props", "is-in-editor"]));
     };
   }
-}), je = /* @__PURE__ */ y({
+}), Oe = /* @__PURE__ */ y({
   // eslint-disable-next-line vue/multi-word-component-names
   name: "Page",
   inheritAttrs: !1,
@@ -636,40 +629,40 @@ const be = (t) => (e, n, r = {}) => (
     }
   },
   setup(t) {
-    const e = S(), n = q("isInEditor", A.isInEditor()), r = q("componentMapping", new b()), o = t, i = C(
+    const e = w(), o = I("isInEditor", A.isInEditor()), n = I("componentMapping", new b()), r = t, i = C(
       () => x.getChildComponents(
-        o.cqPath,
-        o.cqItems,
-        o.cqItemsOrder,
-        o.aemNoDecoration,
+        r.cqPath,
+        r.cqItems,
+        r.cqItemsOrder,
+        r.aemNoDecoration,
         () => ({}),
         !0,
-        r
+        n
       )
     ), p = C(
-      () => x.getChildPages(o.cqChildren, r)
-    ), a = C(() => {
-      const s = ["aem-page"];
-      e.cssClassNames && s.push(...e.cssClassNames.split(" "));
-      const u = {
-        class: s.join(" ")
+      () => x.getChildPages(r.cqChildren, n)
+    ), s = C(() => {
+      const a = ["aem-page"];
+      e.cssClassNames && a.push(...e.cssClassNames.split(" "));
+      const f = {
+        class: a.join(" ")
       };
-      return n && (u["data-cq-data-path"] = o.cqPath), u;
+      return o && (f["data-cq-data-path"] = r.cqPath), f;
     });
     return G(() => {
       e.title && (document.title = e.title);
-    }), Y(() => {
+    }), X(() => {
       e.title && (document.title = e.title);
-    }), (s, u) => (f(), _("div", I(k(a.value)), [
-      (f(!0), _(L, null, D(i.value, (d) => (f(), P(v(d), {
+    }), (a, f) => (u(), _("div", q($(s.value)), [
+      (u(!0), _(k, null, D(i.value, (d) => (u(), P(v(d), {
         key: d.toString()
       }))), 128)),
-      (f(!0), _(L, null, D(p.value, (d) => (f(), P(v(d), {
+      (u(!0), _(k, null, D(p.value, (d) => (u(), P(v(d), {
         key: d.toString()
       }))), 128))
     ], 16));
   }
-}), Ne = /* @__PURE__ */ y({
+}), je = /* @__PURE__ */ y({
   inheritAttrs: !1,
   __name: "ResponsiveGrid",
   props: {
@@ -699,52 +692,52 @@ const be = (t) => (e, n, r = {}) => (
     }
   },
   setup(t) {
-    const e = t, n = S(), r = typeof e.isInEditor < "u" ? e.isInEditor : q("isInEditor", A.isInEditor()), o = () => {
-      const a = {}, s = ["aem-container"];
-      return e.gridClassNames && s.push(e.gridClassNames), a.class = s.join(" "), r && (a["data-cq-data-path"] = e.cqPath), a;
+    const e = t, o = w(), n = typeof e.isInEditor < "u" ? e.isInEditor : I("isInEditor", A.isInEditor()), r = () => {
+      const s = {}, a = ["aem-container"];
+      return e.gridClassNames && a.push(e.gridClassNames), s.class = a.join(" "), n && (s["data-cq-data-path"] = e.cqPath), s;
     }, i = () => {
-      const a = {
+      const s = {
         cqPath: e.cqPath
-      }, s = [
+      }, a = [
         "new",
         "section",
         "aem-Grid-newComponent"
       ];
-      return a.placeholderClassNames = s.join(" "), a;
-    }, p = (a) => {
-      const s = {};
-      return e.columnClassNames && e.columnClassNames[a] && (s.class = e.columnClassNames[a]), s;
+      return s.placeholderClassNames = a.join(" "), s;
+    }, p = (s) => {
+      const a = {};
+      return e.columnClassNames && e.columnClassNames[s] && (a.class = e.columnClassNames[s]), a;
     };
-    return (a, s) => (f(), P(_e, N({
+    return (s, a) => (u(), P(Ce, S({
       "aem-no-decoration": e.aemNoDecoration,
       "cq-path": e.cqPath,
-      "get-container-props": o,
+      "get-container-props": r,
       "get-item-component-props": p,
       "get-placeholder-props": i,
-      "is-in-editor": h(r),
+      "is-in-editor": h(n),
       title: e.title
-    }, { ...h(n) }), null, 16, ["aem-no-decoration", "cq-path", "is-in-editor", "title"]));
+    }, { ...h(o) }), null, 16, ["aem-no-decoration", "cq-path", "is-in-editor", "title"]));
   }
 });
 export {
-  fe as AllowedComponentPlaceholder,
-  Pe as AllowedComponentPlaceholderList,
-  _e as AllowedComponentsContainer,
-  Ae as ComponentMapping,
-  ne as CompositeEditableProvider,
-  se as CompositeModelProvider,
-  Ce as Container,
-  ye as ContainerPlaceholder,
-  ae as ContextProvider,
-  oe as EditableProvider,
-  be as MapTo,
-  re as ModelProvider,
-  je as Page,
-  Ne as ResponsiveGrid,
+  ue as AllowedComponentPlaceholder,
+  he as AllowedComponentPlaceholderList,
+  Ce as AllowedComponentsContainer,
+  Se as ComponentMapping,
+  oe as CompositeEditableProvider,
+  re as CompositeModelProvider,
+  ye as Container,
+  ge as ContainerPlaceholder,
+  se as ContextProvider,
+  te as EditableProvider,
+  ve as MapTo,
+  ne as ModelProvider,
+  Oe as Page,
+  je as ResponsiveGrid,
   x as Utils,
-  Ee as componentClassNames,
-  Oe as componentProperties,
-  ie as withContext,
-  pe as withEditable,
-  ce as withModel
+  be as componentClassNames,
+  Ee as componentProperties,
+  ae as withContext,
+  ce as withEditable,
+  ie as withModel
 };
