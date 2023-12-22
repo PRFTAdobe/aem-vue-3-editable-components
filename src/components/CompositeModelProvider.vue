@@ -37,7 +37,7 @@
   <ModelProvider
     :cq-force-reload="cqForceReload as boolean"
     :inject-props-on-init="injectPropsOnInit"
-    :model-properties="{ ...attrs }"
+    :model-properties="modelProperties"
     v-bind="modelProperties"
     @update-model="updateModelProperties"
   >
