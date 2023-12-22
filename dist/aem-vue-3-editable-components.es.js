@@ -283,7 +283,7 @@ const ee = /* @__PURE__ */ Z(K), M = {
     }
   },
   setup(t) {
-    const e = t, o = L(), n = S(), r = H({ ...n }), { modelConfig: a } = V(e), p = n.cqForceReload || a.value.forceReload, { injectPropsOnInit: s } = a.value, i = (u) => {
+    const e = t, o = L(), n = S(), r = H(n), { modelConfig: a } = V(e), p = n.cqForceReload || a.value.forceReload, { injectPropsOnInit: s } = a.value, i = (u) => {
       Object.assign(r, u);
     };
     return (u, m) => (f(), P(ne, w({

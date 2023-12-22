@@ -23,7 +23,7 @@
 
   const slots = useSlots();
   const attrs = useAttrs();
-  const modelProperties = reactive({ ...attrs });
+  const modelProperties = reactive(attrs);
 
   const { modelConfig } = toRefs(props);
 
