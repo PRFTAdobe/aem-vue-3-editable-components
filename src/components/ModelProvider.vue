@@ -11,6 +11,7 @@
     onMounted,
     onUnmounted,
     PropType,
+    useAttrs,
     useSlots,
   } from 'vue';
   import Utils from '@/utils/Utils';
@@ -44,6 +45,7 @@
   });
 
   const slots = useSlots();
+  const attrs = useAttrs();
   const isInEditor = inject('isInEditor', AuthoringUtils.isInEditor());
   const emit = defineEmits<{
     <P extends MappedComponentProperties>(
@@ -76,12 +78,9 @@
         forceReload: props.cqForceReload,
       })
         .then((data: Model) => {
-          console.log(
-            'Ran ModelProvider to retrieve the following data: ',
-            data,
-          );
           if (data && Object.keys(data).length > 0) {
             emit('updateModel', {
+              ...attrs,
               ...Utils.modelToProps(data),
               cqPath: updatedCqPath(),
             });

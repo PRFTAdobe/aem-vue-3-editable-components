@@ -16,7 +16,7 @@
 
   const slots = useSlots();
   const attrs = useAttrs();
-  const modelProperties = ref(attrs);
+  const modelProperties = ref(attrs as unknown as MappedComponentProperties);
 
   const { modelConfig } = toRefs(props);
 
@@ -26,7 +26,7 @@
   const updateModelProperties = <P extends MappedComponentProperties>(
     modelProps: P,
   ) => {
-    Object.assign(modelProperties.value, modelProps);
+    modelProperties.value = modelProps;
   };
 
   defineOptions({
