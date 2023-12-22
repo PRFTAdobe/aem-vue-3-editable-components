@@ -76,6 +76,10 @@
         forceReload: props.cqForceReload,
       })
         .then((data: Model) => {
+          console.log(
+            'Ran ModelProvider to retrieve the following data: ',
+            data,
+          );
           if (data && Object.keys(data).length > 0) {
             emit('updateModel', {
               ...Utils.modelToProps(data),
