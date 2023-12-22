@@ -1,5 +1,12 @@
 <script lang="ts" setup>
-  import { Component, PropType, ref, toRefs, useAttrs, useSlots } from 'vue';
+  import {
+    Component,
+    PropType,
+    reactive,
+    toRefs,
+    useAttrs,
+    useSlots,
+  } from 'vue';
   // eslint-disable-next-line import/no-cycle
   import {
     MappedComponentProperties,
@@ -16,7 +23,7 @@
 
   const slots = useSlots();
   const attrs = useAttrs();
-  const modelProperties = ref(attrs as unknown as MappedComponentProperties);
+  const modelProperties = reactive(useAttrs());
 
   const { modelConfig } = toRefs(props);
 
@@ -26,7 +33,7 @@
   const updateModelProperties = <P extends MappedComponentProperties>(
     modelProps: P,
   ) => {
-    modelProperties.value = modelProps;
+    Object.assign(modelProperties, modelProps);
   };
 
   defineOptions({
