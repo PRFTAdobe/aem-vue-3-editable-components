@@ -7,7 +7,6 @@
   } from '@adobe/aem-spa-page-model-manager';
   import {
     Component,
-    computed,
     inject,
     onMounted,
     onUnmounted,
@@ -56,7 +55,7 @@
     ): void;
   }>();
 
-  const updatedCqPath = computed(() => {
+  const updatedCqPath = () => {
     const { pagePath, itemPath, injectPropsOnInit, cqPath } = props;
     return Utils.getCQPath({
       pagePath,
@@ -64,7 +63,7 @@
       injectPropsOnInit,
       cqPath,
     });
-  });
+  };
 
   const updateData = (cqPath: string) => {
     const { pagePath, itemPath, injectPropsOnInit } = props;
@@ -83,7 +82,7 @@
             emit('updateModel', {
               ...attrs,
               ...Utils.modelToProps(data),
-              cqPath: updatedCqPath.value,
+              cqPath: updatedCqPath(),
             });
             // Fire event once component model has been fetched and rendered to enable editing on AEM
             if (injectPropsOnInit && isInEditor) {
@@ -100,10 +99,10 @@
     }
   };
 
-  const updateDataListener = updateData.bind(null, updatedCqPath.value);
+  const updateDataListener = updateData.bind(null, updatedCqPath());
 
   onMounted(() => {
-    const cqPath = updatedCqPath.value;
+    const cqPath = updatedCqPath();
 
     if (props.injectPropsOnInit) {
       updateData(cqPath);
