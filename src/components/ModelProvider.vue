@@ -11,11 +11,10 @@
     onMounted,
     onUnmounted,
     PropType,
-    reactive,
-    useAttrs,
     useSlots,
   } from 'vue';
   import Utils from '@/utils/Utils';
+  import { MappedComponentProperties } from '@/ComponentMapping';
 
   const props = defineProps({
     // eslint-disable-next-line vue/require-default-prop
@@ -46,8 +45,14 @@
 
   const slots = useSlots();
   const isInEditor = inject('isInEditor', AuthoringUtils.isInEditor());
+  const emit = defineEmits<{
+    <P extends MappedComponentProperties>(
+      e: 'updateModel',
+      // eslint-disable-next-line no-use-before-define
+      modelProps: P,
+    ): void;
+  }>();
 
-  const reactiveModelProperties = reactive(useAttrs());
   const updatedCqPath = () => {
     const { pagePath, itemPath, injectPropsOnInit, cqPath } = props;
     return Utils.getCQPath({
@@ -72,7 +77,10 @@
       })
         .then((data: Model) => {
           if (data && Object.keys(data).length > 0) {
-            Object.assign(reactiveModelProperties, Utils.modelToProps(data));
+            emit('updateModel', {
+              ...Utils.modelToProps(data),
+              cqPath: updatedCqPath(),
+            });
             // Fire event once component model has been fetched and rendered to enable editing on AEM
             if (injectPropsOnInit && isInEditor) {
               PathUtils.dispatchGlobalCustomEvent(
@@ -109,11 +117,5 @@
 </script>
 
 <template>
-  <component
-    :is="slots.default?.()[0] as Component"
-    v-bind="{
-      cqPath: updatedCqPath(),
-      ...reactiveModelProperties,
-    }"
-  />
+  <component :is="slots.default?.()[0] as Component" v-bind="modelProperties" />
 </template>
