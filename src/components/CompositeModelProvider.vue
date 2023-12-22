@@ -1,10 +1,7 @@
 <script lang="ts" setup>
-  import { Component, PropType, ref, toRefs, useAttrs, useSlots } from 'vue';
+  import { Component, PropType, toRefs, useAttrs, useSlots } from 'vue';
   // eslint-disable-next-line import/no-cycle
-  import {
-    MappedComponentProperties,
-    ReloadableModelProperties,
-  } from '@/ComponentMapping';
+  import { ReloadableModelProperties } from '@/ComponentMapping';
   import ModelProvider from '@/components/ModelProvider.vue';
 
   const props = defineProps({
@@ -16,18 +13,11 @@
 
   const slots = useSlots();
   const attrs = useAttrs();
-  const modelProperties = ref(attrs as unknown as MappedComponentProperties);
 
   const { modelConfig } = toRefs(props);
 
   const cqForceReload = attrs.cqForceReload || modelConfig.value.forceReload;
   const { injectPropsOnInit } = modelConfig.value;
-
-  const updateModelProperties = <P extends MappedComponentProperties>(
-    modelProps: P,
-  ) => {
-    modelProperties.value = modelProps;
-  };
 
   defineOptions({
     inheritAttrs: false,
@@ -37,9 +27,7 @@
   <ModelProvider
     :cq-force-reload="cqForceReload as boolean"
     :inject-props-on-init="injectPropsOnInit"
-    :model-properties="{ ...attrs }"
-    v-bind="modelProperties"
-    @update-model="updateModelProperties"
+    v-bind="{ ...attrs }"
   >
     <component :is="slots.default?.()[0] as Component" />
   </ModelProvider>

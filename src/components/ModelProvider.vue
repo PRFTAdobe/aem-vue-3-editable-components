@@ -10,7 +10,7 @@
     inject,
     onMounted,
     onUnmounted,
-    PropType,
+    ref,
     useAttrs,
     useSlots,
   } from 'vue';
@@ -30,10 +30,6 @@
       type: Boolean,
       default: false,
     },
-    modelProperties: {
-      type: Object as PropType<{ [key: string]: unknown }>,
-      default: () => ({}),
-    },
     // eslint-disable-next-line vue/require-default-prop
     pagePath: {
       type: String,
@@ -47,13 +43,7 @@
   const slots = useSlots();
   const attrs = useAttrs();
   const isInEditor = inject('isInEditor', AuthoringUtils.isInEditor());
-  const emit = defineEmits<{
-    <P extends MappedComponentProperties>(
-      e: 'updateModel',
-      // eslint-disable-next-line no-use-before-define
-      modelProps: P,
-    ): void;
-  }>();
+  const modelProperties = ref(attrs as unknown as MappedComponentProperties);
 
   const updatedCqPath = () => {
     const { pagePath, itemPath, injectPropsOnInit, cqPath } = props;
@@ -79,11 +69,11 @@
       })
         .then((data: Model) => {
           if (data && Object.keys(data).length > 0) {
-            emit('updateModel', {
-              ...attrs,
+            modelProperties.value = {
+              ...modelProperties.value,
               ...Utils.modelToProps(data),
               cqPath: updatedCqPath(),
-            });
+            };
             // Fire event once component model has been fetched and rendered to enable editing on AEM
             if (injectPropsOnInit && isInEditor) {
               PathUtils.dispatchGlobalCustomEvent(
