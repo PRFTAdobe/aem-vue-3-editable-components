@@ -7,12 +7,13 @@
   } from '@adobe/aem-spa-page-model-manager';
   import {
     Component,
-    computed,
     inject,
     onMounted,
     onUnmounted,
     PropType,
+    ref,
     useSlots,
+    watchEffect,
   } from 'vue';
   import Utils from '@/utils/Utils';
 
@@ -45,16 +46,9 @@
 
   const slots = useSlots();
   const isInEditor = inject('isInEditor', AuthoringUtils.isInEditor());
-  const emit = defineEmits(['update:modelProperties']);
-
-  const updatedModelProperties = computed({
-    get() {
-      return props.modelProperties;
-    },
-    set(value) {
-      emit('update:modelProperties', value);
-    },
-  });
+  const updatedModelProperties = ref();
+  // eslint-disable-next-line no-return-assign
+  watchEffect(() => (updatedModelProperties.value = props.modelProperties));
 
   const updatedCqPath = () => {
     const { pagePath, itemPath, injectPropsOnInit, cqPath } = props;
