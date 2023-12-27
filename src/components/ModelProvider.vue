@@ -7,6 +7,7 @@
   } from '@adobe/aem-spa-page-model-manager';
   import {
     Component,
+    computed,
     inject,
     onMounted,
     onUnmounted,
@@ -14,7 +15,6 @@
     useSlots,
   } from 'vue';
   import Utils from '@/utils/Utils';
-  import { MappedComponentProperties } from '@/ComponentMapping';
 
   const props = defineProps({
     // eslint-disable-next-line vue/require-default-prop
@@ -45,13 +45,16 @@
 
   const slots = useSlots();
   const isInEditor = inject('isInEditor', AuthoringUtils.isInEditor());
-  const emit = defineEmits<{
-    <P extends MappedComponentProperties>(
-      e: 'updateModel',
-      // eslint-disable-next-line no-use-before-define
-      modelProps: P,
-    ): void;
-  }>();
+  const emit = defineEmits(['update:modelProperties']);
+
+  const updatedModelProperties = computed({
+    get() {
+      return props.modelProperties;
+    },
+    set(value) {
+      emit('update:modelProperties', value);
+    },
+  });
 
   const updatedCqPath = () => {
     const { pagePath, itemPath, injectPropsOnInit, cqPath } = props;
@@ -77,10 +80,11 @@
       })
         .then((data: Model) => {
           if (data && Object.keys(data).length > 0) {
-            emit('updateModel', {
+            updatedModelProperties.value = {
+              ...props.modelProperties,
               ...Utils.modelToProps(data),
               cqPath: updatedCqPath(),
-            });
+            };
             // Fire event once component model has been fetched and rendered to enable editing on AEM
             if (injectPropsOnInit && isInEditor) {
               PathUtils.dispatchGlobalCustomEvent(
@@ -117,5 +121,8 @@
 </script>
 
 <template>
-  <component :is="slots.default?.()[0] as Component" v-bind="modelProperties" />
+  <component
+    :is="slots.default?.()[0] as Component"
+    v-bind="updatedModelProperties"
+  />
 </template>

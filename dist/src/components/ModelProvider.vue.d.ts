@@ -24,7 +24,7 @@ declare const _default: import("vue").DefineComponent<{
         type: StringConstructor;
     };
 }, {}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {
-    [x: string]: (...args: unknown[]) => void;
+    "update:modelProperties": (...args: any[]) => void;
 }, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
     cqPath: {
         type: StringConstructor;
@@ -49,7 +49,9 @@ declare const _default: import("vue").DefineComponent<{
     itemPath: {
         type: StringConstructor;
     };
-}>>, {
+}>> & {
+    "onUpdate:modelProperties"?: ((...args: any[]) => any) | undefined;
+}, {
     cqForceReload: boolean;
     injectPropsOnInit: boolean;
     modelProperties: {
