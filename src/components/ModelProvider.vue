@@ -123,6 +123,6 @@
 <template>
   <component
     :is="slots.default?.()[0] as Component"
-    v-model="updatedModelProperties"
+    v-bind="updatedModelProperties"
   />
 </template>
