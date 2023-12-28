@@ -13,7 +13,6 @@
     PropType,
     ref,
     useSlots,
-    watch,
     watchEffect,
   } from 'vue';
   import Utils from '@/utils/Utils';
@@ -104,12 +103,6 @@
       updateData(cqPath);
     }
     ModelManager.addListener(cqPath, updateDataListener);
-  });
-
-  watch(updatedModelProperties, async (current, previous) => {
-    if (current !== previous) {
-      console.log(JSON.stringify(current, null, 2));
-    }
   });
 
   onUnmounted(() => {
